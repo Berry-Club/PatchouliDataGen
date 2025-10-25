@@ -38,6 +38,11 @@ class BookCategory private constructor(
 		return ResourceLocation.fromNamespaceAndPath(header.getBookId(), this.getSaveName())
 	}
 
+	companion object {
+		@JvmStatic
+		fun setup(): Builder = Builder.category()
+	}
+
 	class Builder private constructor() {
 
 		private var bookHeader: BookHeader? = null
@@ -130,7 +135,7 @@ class BookCategory private constructor(
 
 		companion object {
 			@JvmStatic
-			fun create(): Builder = Builder()
+			fun category(): Builder = Builder()
 		}
 	}
 

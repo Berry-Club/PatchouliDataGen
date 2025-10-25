@@ -81,6 +81,11 @@ class BookHeader private constructor(
 		return json
 	}
 
+	companion object {
+		@JvmStatic
+		fun setup() = Builder.header()
+	}
+
 	class Builder private constructor() {
 
 		private var nameComponent: Component? = null

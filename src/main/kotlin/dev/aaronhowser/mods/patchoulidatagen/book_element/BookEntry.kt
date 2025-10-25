@@ -53,4 +53,30 @@ class BookEntry private constructor(
 
 		return json
 	}
+
+	companion object {
+		@JvmStatic
+		fun setup() = Builder.entry()
+	}
+
+	class Builder private constructor() {
+
+		private val pages: MutableSet<PageType> = mutableSetOf()
+		private var category: BookCategory? = null
+		private var name: String? = null
+		private var icon: ItemLike? = null
+		private var advancement: String? = null
+		private var configFlag: String? = null
+		private var priority: Boolean? = null
+		private var secret: Boolean? = null
+		private var readByDefault: Boolean? = null
+		private var sortNum: Int? = null
+		private var turnIn: String? = null
+
+		companion object {
+			fun entry(): Builder = Builder()
+		}
+
+	}
+
 }
