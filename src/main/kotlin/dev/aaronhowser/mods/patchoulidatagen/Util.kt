@@ -32,7 +32,7 @@ object Util {
 	@JvmStatic
 	fun JsonObject.addIfNotNull(key: String, value: ResourceLocation?) {
 		if (value != null) {
-			this.add(key, value)
+			this.addProperty(key, value.toString())
 		}
 	}
 
