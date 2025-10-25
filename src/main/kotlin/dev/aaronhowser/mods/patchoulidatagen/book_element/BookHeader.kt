@@ -255,52 +255,23 @@ class BookHeader private constructor(
 		}
 
 		fun build(consumer: Consumer<BookElement>): BookHeader {
-			var header: BookHeader
+			val finalName: String
+			val finalLandingText: String
 
 			if (i18n) {
-				if (nameComponent == null || landingTextComponent == null) {
-					error("Name and landing text components must be set when i18n is enabled!")
-				}
-
-				header = BookHeader(
-					bookId = this.bookId!!,
-					name = this.nameComponent!!.string,
-					landingText = this.landingTextComponent!!.string,
-					bookTexture = this.bookTexture,
-					fillerTexture = this.fillerTexture,
-					craftingTexture = this.craftingTexture,
-					textColor = this.textColor,
-					headerColor = this.headerColor,
-					nameplateColor = this.nameplateColor,
-					linkColor = this.linkColor,
-					linkHoverColor = this.linkHoverColor,
-					progressBarColor = this.progressBarColor,
-					progressBarBackground = this.progressBarBackground,
-					openSound = this.openSound,
-					flipSound = this.flipSound,
-					showProgress = this.showProgress,
-					version = this.version,
-					subtitle = this.subtitle,
-					creativeTab = this.creativeTab,
-					advancementTab = this.advancementTab,
-					doNotGenerateBook = this.doNotGenerateBook,
-					customBookItem = this.customBookItem,
-					showToast = this.showToast,
-					useBlockyFont = this.useBlockyFont,
-					i18n = this.i18n,
-					pauseGame = this.pauseGame,
-					icon = this.icon
-				)
+				finalName = nameComponent?.string
+					?: error("Name component must be set when i18n is enabled!")
+				finalLandingText = landingTextComponent?.string
+					?: error("Landing text component must be set when i18n is enabled!")
 			} else {
-				if (nameText == null || landingTextText == null) {
-					error("Name and landing text must be set when i18n is disabled!")
-				}
+				finalName = nameText ?: error("Name must be set when i18n is disabled!")
+				finalLandingText = landingTextText ?: error("Landing text must be set when i18n is disabled!")
 			}
 
-			header = BookHeader(
+			val header = BookHeader(
 				bookId = this.bookId!!,
-				name = this.nameText!!,
-				landingText = this.landingTextText!!,
+				name = finalName,
+				landingText = finalLandingText,
 				bookTexture = this.bookTexture,
 				fillerTexture = this.fillerTexture,
 				craftingTexture = this.craftingTexture,
