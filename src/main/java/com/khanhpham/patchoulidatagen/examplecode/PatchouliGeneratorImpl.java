@@ -7,6 +7,8 @@ import com.khanhpham.patchoulidatagen.bookelement.BookHeader;
 import com.khanhpham.patchoulidatagen.provider.PatchouliBookProvider;
 import com.khanhpham.patchoulidatagen.pages.pagetype.defaults.*;
 import com.khanhpham.patchoulidatagen.utils.PatchouliMultiblock;
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage;
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage;
 import net.minecraft.core.Direction;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
@@ -47,7 +49,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
             .save(consumer, "test_second_category");
 
         CraftingRecipePage crafting =
-                CraftingRecipePage.setup().mainRecipe(Blocks.CRAFTING_TABLE).build();
+                CraftingRecipePage.builder().mainRecipe(Blocks.CRAFTING_TABLE).build();
         MultiblockPage multiblockPage = MultiblockPage.setup()
             .multiblock("Test Multiblock",
                     PatchouliMultiblock.Builder.multiblock()

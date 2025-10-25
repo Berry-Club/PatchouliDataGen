@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.patchoulidatagen.util
+package dev.aaronhowser.mods.patchoulidatagen.multiblock
 
 import com.google.gson.JsonObject
 
