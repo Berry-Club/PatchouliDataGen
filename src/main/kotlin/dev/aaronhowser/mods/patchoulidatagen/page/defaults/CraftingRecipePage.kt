@@ -10,7 +10,7 @@ import net.minecraft.world.level.ItemLike
 /**
  * This page is used to display a crafting recipe.
  *
- * See the [Default Page Types - Crafting Recipe Pages](https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/page-types/#crafting-recipe-pages) documentation.
+ * See [Default Page Types - Crafting Recipe Pages](https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/page-types/#crafting-recipe-pages)
  */
 class CraftingRecipePage private constructor(
 	private val recipeOne: ResourceLocation,
