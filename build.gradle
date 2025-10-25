@@ -1,160 +1,211 @@
 plugins {
-    id 'java'
-    id 'eclipse'
+    id 'java-library'
+    id 'idea'
     id 'maven-publish'
-    id "com.diffplug.spotless" version "6.13.0"
-    id 'net.minecraftforge.gradle' version '5.1.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'net.neoforged.moddev' version '2.0.91'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.21'
+    id "me.shedaniel.unified-publishing" version "0.1.+"
 }
 
-version = '1.0'
-group = 'com.khanhpham.patchoulidatagen'
-archivesBaseName = 'patchoulidatagen'
+def ENV = System.getenv()
+def isLocal = !ENV.containsKey("GITHUB_RUN_NUMBER")
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+def archiveName = "${mod_id.replace("_", "-")}-${minecraft_version}"
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    mappings channel: 'parchment', version: '2022.12.18-1.19.3'
+version = "${mod_version}-${isLocal ? "local.${Instant.now().epochSecond}" : "build.${ENV.GITHUB_RUN_NUMBER}"}"
+group = project.mod_group_id
+base.archivesName = archiveName
+
+println("Building version: ${version}")
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+compileKotlin.compilerOptions.jvmTarget = JvmTarget.JVM_21
+
+neoForge {
+    version = neo_version
+
+    validateAccessTransformers = true
+
+    accessTransformers {
+        publish(project.file('src/main/resources/META-INF/accesstransformer.cfg'))
+    }
+
     runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
 
-            mods {
-                patchoulidatagen {
-                    source sourceSets.main
-                }
+        "Client-One" {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            if (ENV.MC_CLIENT_ARGS) {
+                programArguments.addAll(ENV.MC_CLIENT_ARGS.split(' '))
+            }
+
+            gameDirectory = file 'runs/client'
+        }
+
+        "Client-Two" {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+
+            gameDirectory = file 'runs/client'
+
+            if (ENV.MC_CLIENT_2_ARGS) {
+                programArguments.addAll(ENV.MC_CLIENT_2_ARGS.split(' '))
             }
         }
 
         server {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            server()
+            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
 
-            mods {
-                patchoulidatagen {
-                    source sourceSets.main
-                }
-            }
+            gameDirectory = file 'runs/server'
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            data()
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
 
-            //for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'patchoulidatagen', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            gameDirectory = file 'runs/client'
+        }
+    }
 
-            mods {
-                patchoulidatagen {
-                    source sourceSets.main
-                }
-            }
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
         }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
 repositories {
-    mavenCentral()
+    mavenLocal()
+
     maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven { url 'https://maven.blamejared.com' }
+
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.0'
-
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78")
-
-
-    // compile against the JEI API but do not include it at runtime
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar for Forge
-    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
-
+    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
 }
 
-spotless {
-    java {
-        // Excludes build folder since it contains generated java classes.
-        targetExclude("build/**")
-        eclipse('4.19.0').configFile("${rootProject.rootDir}/meta/formatting/google-style-eclipse.xml")
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
+            curios_version_range   : curios_version_range,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 
-javadoc {
-    if (JavaVersion.current().isJava8Compatible()) {
-        options.addStringOption('Xdoclint:none', '-quiet')
-        logging.captureStandardError LogLevel.INFO
-        logging.captureStandardOutput LogLevel.INFO
+publishing {
+    publications {
+        mavenNeoForge(MavenPublication) {
+            artifactId = archiveName
+            from components.java
+        }
     }
 
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
+    repositories {
+        if (ENV.MAVEN_URL && ENV.MAVEN_USERNAME && ENV.MAVEN_TOKEN) {
+            maven {
+                url = ENV.MAVEN_URL
+                credentials {
+                    username = ENV.MAVEN_USERNAME
+                    password = ENV.MAVEN_TOKEN
+                }
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }
 
 java {
-    withJavadocJar()
     withSourcesJar()
+    withJavadocJar()
 }
 
-compileJava {
-    // Makes spotlessApply task run on every compile/build.
-    dependsOn 'spotlessApply'
+unifiedPublishing {
+    project {
+        displayName = "Patchouli DataGen ${project.minecraft_version} ${project.version}"
+        releaseType = "beta"
+        gameVersions = [project.minecraft_version]
+        gameLoaders = ["neoforge"]
 
-    // Nails the Java-Version of every Subproject
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-}
+        changelog = "https://github.com/Berry-Club/PatchouliDataGen/blob/master/CHANGELOG.md#" + project.mod_version.toString().replace(".", "")
 
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "patchoulidatagen",
-                "Specification-Vendor"    : "examplemodsareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "examplemodsareus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
+        mainPublication jar
 
-jar.finalizedBy('reobfJar')
+        relations {
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+            depends {
+                curseforge = modrinth = "kotlin-for-forge"
+            }
+
+            depends {
+                curseforge = modrinth = "curios"
+            }
+
+            optional {
+                curseforge = modrinth = "modonomicon"
+            }
         }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+
+        if (ENV.CURSEFORGE_KEY) {
+            curseforge {
+                token = ENV.CURSEFORGE_KEY
+                id = project.curseforge_id
+            }
         }
+
+        if (ENV.MODRINTH_TOKEN) {
+            modrinth {
+                token = ENV.MODRINTH_TOKEN
+                id = project.modrinth_id
+            }
+        }
+
     }
 }
