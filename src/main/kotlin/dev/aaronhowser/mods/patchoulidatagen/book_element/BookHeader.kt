@@ -2,7 +2,9 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.Util.isNotTrue
 import dev.aaronhowser.mods.patchoulidatagen.Util.isTrue
+import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 
@@ -77,4 +79,58 @@ class BookHeader private constructor(
 
 		return json
 	}
+
+	class Builder private constructor() {
+
+		private var componentSet = false
+		private var name: Component? = null
+		private var landingText: Component? = null
+
+		private var nameText: String? = null
+		private var landingTextText: String? = null
+		private var bookTexture: ResourceLocation? = null
+		private var fillerTexture: String? = null
+		private var craftingTexture: String? = null
+		private var textColor: Int? = null
+		private var headerColor: Int? = null
+		private var nameplateColor: Int? = null
+		private var linkColor: Int? = null
+		private var linkHoverColor: Int? = null
+		private var progressBarColor: Int? = null
+		private var progressBarBackground: Int? = null
+		private var openSound: ResourceLocation? = null
+		private var flipSound: ResourceLocation? = null
+		private var showProgress: Boolean? = null
+		private var version: String? = null
+		private var subtitle: String? = null
+		private var creativeTab: String? = null
+		private var advancementTab: String? = null
+		private var doNotGenerateBook: Boolean? = null
+		private var customBookItem: Item? = null
+		private var showToast: Boolean? = null
+		private var useBlockyFont: Boolean? = null
+		private var i18n: Boolean = false
+		private var pauseGame = false
+		private var icon: ResourceLocation? = null
+		private var bookId: String? = null
+
+		fun setBookComponent(
+			bookId: String,
+			name: Component,
+			landingText: Component
+		): Builder {
+
+			if (i18n.isNotTrue()) {
+				error("Don't use setBookComponent when i18n is false!")
+			}
+
+			return this
+		}
+
+		companion object {
+			fun header() = Builder()
+		}
+
+	}
+
 }

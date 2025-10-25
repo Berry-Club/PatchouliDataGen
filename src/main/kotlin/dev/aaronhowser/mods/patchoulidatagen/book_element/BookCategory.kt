@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.Util.isNotTrue
 import dev.aaronhowser.mods.patchoulidatagen.Util.isTrue
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -61,7 +62,7 @@ class BookCategory private constructor(
 				error("Display properties have already been set!")
 			}
 
-			if (bookHeader?.isTranslatable().isTrue().not()) {
+			if (bookHeader?.isTranslatable().isNotTrue()) {
 				error("Cannot use a Component title or description with a non-translatable BookHeader")
 			}
 
@@ -132,7 +133,6 @@ class BookCategory private constructor(
 			@JvmStatic
 			fun create(): Builder = Builder()
 		}
-
 	}
 
 }

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation
 object Util {
 
 	fun Boolean?.isTrue(): Boolean = this == true
+	fun Boolean?.isNotTrue(): Boolean = this != true
 
 	@JvmStatic
 	fun JsonObject.addIfNotNull(key: String, value: String?) {
