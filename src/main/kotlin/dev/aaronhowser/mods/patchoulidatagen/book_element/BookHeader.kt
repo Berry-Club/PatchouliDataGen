@@ -7,6 +7,7 @@ import dev.aaronhowser.mods.patchoulidatagen.Util.isTrue
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
+import java.util.function.Consumer
 
 class BookHeader private constructor(
 	private val bookId: String,
@@ -26,7 +27,7 @@ class BookHeader private constructor(
 	private val flipSound: ResourceLocation?,
 	private val showProgress: Boolean?,
 	private val version: String?,
-	private val subtitle: String,
+	private val subtitle: String?,
 	private val creativeTab: String?,
 	private val advancementTab: String?,
 	private val doNotGenerateBook: Boolean?,
@@ -82,12 +83,11 @@ class BookHeader private constructor(
 
 	class Builder private constructor() {
 
-		private var componentSet = false
-		private var name: Component? = null
-		private var landingText: Component? = null
-
+		private var nameComponent: Component? = null
+		private var landingTextComponent: Component? = null
 		private var nameText: String? = null
 		private var landingTextText: String? = null
+
 		private var bookTexture: ResourceLocation? = null
 		private var fillerTexture: String? = null
 		private var craftingTexture: String? = null
@@ -114,18 +114,223 @@ class BookHeader private constructor(
 		private var icon: ResourceLocation? = null
 		private var bookId: String? = null
 
+		/** Use if it's translatable */
 		fun setBookComponent(
 			bookId: String,
 			name: Component,
 			landingText: Component
 		): Builder {
-
 			if (i18n.isNotTrue()) {
 				error("Don't use setBookComponent when i18n is false!")
 			}
 
+			this.nameComponent = name
+			this.landingTextComponent = landingText
+			this.bookId = bookId
+
 			return this
 		}
+
+		/** Use if it's not translatable */
+		fun setBookText(
+			bookId: String,
+			name: String,
+			landingText: String
+		): Builder {
+			if (i18n.isTrue()) {
+				error("Don't use setBookText when i18n is true!")
+			}
+
+			this.nameText = name
+			this.landingTextText = landingText
+			this.bookId = bookId
+
+			return this
+		}
+
+		fun bookTexture(bookTexture: ResourceLocation): Builder {
+			this.bookTexture = bookTexture
+			return this
+		}
+
+		fun fillerTexture(fillerTexture: String): Builder {
+			this.fillerTexture = fillerTexture
+			return this
+		}
+
+		fun craftingTexture(craftingTexture: String): Builder {
+			this.craftingTexture = craftingTexture
+			return this
+		}
+
+		fun textColor(textColor: Int): Builder {
+			this.textColor = textColor
+			return this
+		}
+
+		fun headerColor(headerColor: Int): Builder {
+			this.headerColor = headerColor
+			return this
+		}
+
+		fun nameplateColor(nameplateColor: Int): Builder {
+			this.nameplateColor = nameplateColor
+			return this
+		}
+
+		fun linkColor(linkColor: Int, linkHoverColor: Int): Builder {
+			this.linkColor = linkColor
+			this.linkHoverColor = linkHoverColor
+			return this
+		}
+
+		fun progressBarColor(progressBarColor: Int): Builder {
+			this.progressBarColor = progressBarColor
+			return this
+		}
+
+		fun progressBarBackground(progressBarBackground: Int): Builder {
+			this.progressBarBackground = progressBarBackground
+			return this
+		}
+
+		fun openSound(openSound: ResourceLocation): Builder {
+			this.openSound = openSound
+			return this
+		}
+
+		fun flipSound(flipSound: ResourceLocation): Builder {
+			this.flipSound = flipSound
+			return this
+		}
+
+		fun hideProgress(): Builder {
+			this.showProgress = false
+			return this
+		}
+
+		fun version(version: String): Builder {
+			this.version = version
+			return this
+		}
+
+		fun subtitle(subtitle: String): Builder {
+			this.subtitle = subtitle
+			return this
+		}
+
+		fun creativeTab(creativeTab: String): Builder {
+			this.creativeTab = creativeTab
+			return this
+		}
+
+		fun advancementTab(advancementTab: String): Builder {
+			this.advancementTab = advancementTab
+			return this
+		}
+
+		fun disableBook(): Builder {
+			this.doNotGenerateBook = true
+			return this
+		}
+
+		fun disableToast(): Builder {
+			this.showToast = false
+			return this
+		}
+
+		fun useMinecraftFont(): Builder {
+			this.useBlockyFont = true
+			return this
+		}
+
+		fun enableI18n(): Builder {
+			this.i18n = true
+			return this
+		}
+
+		fun pauseGameWhenOpened(): Builder {
+			this.pauseGame = true
+			return this
+		}
+
+		fun build(consumer: Consumer<BookElement>): BookHeader {
+			var header: BookHeader
+
+			if (i18n) {
+				if (nameComponent == null || landingTextComponent == null) {
+					error("Name and landing text components must be set when i18n is enabled!")
+				}
+
+				header = BookHeader(
+					bookId = this.bookId!!,
+					name = this.nameComponent!!.string,
+					landingText = this.landingTextComponent!!.string,
+					bookTexture = this.bookTexture,
+					fillerTexture = this.fillerTexture,
+					craftingTexture = this.craftingTexture,
+					textColor = this.textColor,
+					headerColor = this.headerColor,
+					nameplateColor = this.nameplateColor,
+					linkColor = this.linkColor,
+					linkHoverColor = this.linkHoverColor,
+					progressBarColor = this.progressBarColor,
+					progressBarBackground = this.progressBarBackground,
+					openSound = this.openSound,
+					flipSound = this.flipSound,
+					showProgress = this.showProgress,
+					version = this.version,
+					subtitle = this.subtitle,
+					creativeTab = this.creativeTab,
+					advancementTab = this.advancementTab,
+					doNotGenerateBook = this.doNotGenerateBook,
+					customBookItem = this.customBookItem,
+					showToast = this.showToast,
+					useBlockyFont = this.useBlockyFont,
+					i18n = this.i18n,
+					pauseGame = this.pauseGame,
+					icon = this.icon
+				)
+			} else {
+				if (nameText == null || landingTextText == null) {
+					error("Name and landing text must be set when i18n is disabled!")
+				}
+			}
+
+			header = BookHeader(
+				bookId = this.bookId!!,
+				name = this.nameText!!,
+				landingText = this.landingTextText!!,
+				bookTexture = this.bookTexture,
+				fillerTexture = this.fillerTexture,
+				craftingTexture = this.craftingTexture,
+				textColor = this.textColor,
+				headerColor = this.headerColor,
+				nameplateColor = this.nameplateColor,
+				linkColor = this.linkColor,
+				linkHoverColor = this.linkHoverColor,
+				progressBarColor = this.progressBarColor,
+				progressBarBackground = this.progressBarBackground,
+				openSound = this.openSound,
+				flipSound = this.flipSound,
+				showProgress = this.showProgress,
+				version = this.version,
+				subtitle = this.subtitle,
+				creativeTab = this.creativeTab,
+				advancementTab = this.advancementTab,
+				doNotGenerateBook = this.doNotGenerateBook,
+				customBookItem = this.customBookItem,
+				showToast = this.showToast,
+				useBlockyFont = this.useBlockyFont,
+				i18n = this.i18n,
+				pauseGame = this.pauseGame,
+				icon = this.icon
+			)
+
+			consumer.accept(header)
+			return header
+		}
+
 
 		companion object {
 			fun header() = Builder()
