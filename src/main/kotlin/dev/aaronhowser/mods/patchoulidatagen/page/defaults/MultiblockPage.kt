@@ -34,7 +34,7 @@ class MultiblockPage private constructor(
 
 	companion object {
 		@JvmStatic
-		fun setup() = Builder.setup()
+		fun builder() = Builder.setup()
 	}
 
 	class Builder private constructor() {

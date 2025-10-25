@@ -55,7 +55,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 
 		CraftingRecipePage crafting =
 				CraftingRecipePage.builder().mainRecipe(Blocks.CRAFTING_TABLE).build();
-		MultiblockPage multiblockPage = MultiblockPage.setup()
+		MultiblockPage multiblockPage = MultiblockPage.builder()
 				.multiblock(
 						"Test Multiblock",
 						PatchouliMultiblock.Builder.multiblock()
@@ -82,7 +82,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 		 * @see net.minecraft.world.level.block.StairBlock
 		 */
 		MultiblockPage multiblockPage1 =
-				MultiblockPage.setup()
+				MultiblockPage.builder()
 						.multiblock(
 								"test_multiblock_2", PatchouliMultiblock.setup()
 										.pattern("XXX0XXX")

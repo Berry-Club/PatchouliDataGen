@@ -8,7 +8,7 @@ import dev.aaronhowser.mods.patchoulidatagen.page.PageType
  *
  * See [Page Types - Link Pages](https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/page-types/#link-pages)
  */
-class LinkPage private constructor(
+class LinkPage(
 	private val url: String,
 	private val linkText: String
 ) : PageType {

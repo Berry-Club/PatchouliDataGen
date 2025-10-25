@@ -27,6 +27,11 @@ class SmeltingRecipePage private constructor(
 		}
 	}
 
+	companion object {
+		@JvmStatic
+		fun builder() = Builder.setup()
+	}
+
 	class Builder private constructor() {
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
@@ -86,5 +91,9 @@ class SmeltingRecipePage private constructor(
 			)
 		}
 
+		companion object {
+			@JvmStatic
+			fun setup() = Builder()
+		}
 	}
 }

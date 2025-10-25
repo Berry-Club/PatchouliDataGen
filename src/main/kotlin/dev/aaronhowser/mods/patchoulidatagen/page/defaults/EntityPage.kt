@@ -35,6 +35,11 @@ class EntityPage private constructor(
 		}
 	}
 
+	companion object {
+		@JvmStatic
+		fun builder(): Builder = Builder.setup()
+	}
+
 	class Builder private constructor() {
 
 		private var entity: String? = null
@@ -101,6 +106,11 @@ class EntityPage private constructor(
 				name = name,
 				text = text
 			)
+		}
+
+		companion object {
+			@JvmStatic
+			fun setup() = Builder()
 		}
 
 	}

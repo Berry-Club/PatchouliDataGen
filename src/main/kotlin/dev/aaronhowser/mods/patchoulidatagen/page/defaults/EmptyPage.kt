@@ -22,9 +22,9 @@ class EmptyPage private constructor(
 
 	companion object {
 		@JvmStatic
-		fun setup() = EmptyPage(false)
+		fun withoutFiller() = EmptyPage(false)
 
 		@JvmStatic
-		fun setupWithFiller() = EmptyPage(true)
+		fun withFiller() = EmptyPage(true)
 	}
 }
