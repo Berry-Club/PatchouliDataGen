@@ -1,7 +1,6 @@
 package com.khanhpham.patchoulidatagen.pages.pagetype.defaults;
 
 import com.google.gson.JsonObject;
-import com.khanhpham.patchoulidatagen.pages.pagetype.PageType;
 
 /**
  * This page can display a link in the bottom of the page

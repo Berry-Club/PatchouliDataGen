@@ -2,7 +2,6 @@ package com.khanhpham.patchoulidatagen.pages.pagetype.defaults;
 
 import com.google.gson.JsonObject;
 import com.khanhpham.patchoulidatagen.Utils;
-import com.khanhpham.patchoulidatagen.pages.pagetype.PageType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

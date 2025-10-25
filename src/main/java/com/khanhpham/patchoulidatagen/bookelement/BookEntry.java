@@ -3,7 +3,6 @@ package com.khanhpham.patchoulidatagen.bookelement;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.khanhpham.patchoulidatagen.Utils;
-import com.khanhpham.patchoulidatagen.pages.pagetype.PageType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.ItemLike;
 import org.checkerframework.checker.nullness.qual.NonNull;
