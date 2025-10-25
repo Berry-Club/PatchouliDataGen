@@ -2,13 +2,16 @@ package dev.aaronhowser.mods.patchoulidatagen.multiblock
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.Property
 
 class PatchouliMultiblock(
 	private val multiblock: List<List<String>>,
-	private val mappings: Map<Char, String>
+	private val mappings: Map<Char, String>,
+	private val symmetrical: Boolean?,
+	private val offset: Array<Int>?
 ) : Multiblock {
 
 	override fun toJson(): JsonObject {
@@ -37,6 +40,16 @@ class PatchouliMultiblock(
 
 		json.add("layers", allLayersArray)
 
+		json.addIfNotNull("symmetrical", symmetrical)
+
+		if (offset != null && offset.size == 3) {
+			val offsetArray = JsonArray()
+			for (value in offset) {
+				offsetArray.add(value)
+			}
+			json.add("offset", offsetArray)
+		}
+
 		return json
 	}
 
@@ -50,6 +63,19 @@ class PatchouliMultiblock(
 		private val mappingCharacters: MutableSet<Char> = mutableSetOf()
 		private val mappings: MutableMap<Char, String> = mutableMapOf()
 		private val multiblock: MutableList<List<String>> = mutableListOf()
+
+		private var symmetrical: Boolean? = null
+		private var offset: Array<Int>? = null
+
+		fun setSymmetrical(): Builder {
+			this.symmetrical = true
+			return this
+		}
+
+		fun setOffset(x: Int, y: Int, z: Int): Builder {
+			this.offset = arrayOf(x, y, z)
+			return this
+		}
 
 		fun pattern(vararg layerPattern: String): Builder {
 			val layerMultiblock = layerPattern.toList()
@@ -103,7 +129,9 @@ class PatchouliMultiblock(
 
 			return PatchouliMultiblock(
 				multiblock = multiblock,
-				mappings = mappings
+				mappings = mappings,
+				symmetrical = symmetrical,
+				offset = offset
 			)
 		}
 
