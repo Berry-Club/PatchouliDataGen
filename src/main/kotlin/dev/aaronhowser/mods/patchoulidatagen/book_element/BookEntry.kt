@@ -2,7 +2,6 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import com.khanhpham.patchoulidatagen.pages.pagetype.PageType
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike

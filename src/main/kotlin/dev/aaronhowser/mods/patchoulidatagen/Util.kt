@@ -1,6 +1,9 @@
 package dev.aaronhowser.mods.patchoulidatagen
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.JsonOps
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.ComponentSerialization
 import net.minecraft.resources.ResourceLocation
 
 object Util {
@@ -33,6 +36,17 @@ object Util {
 	fun JsonObject.addIfNotNull(key: String, value: ResourceLocation?) {
 		if (value != null) {
 			this.addProperty(key, value.toString())
+		}
+	}
+
+	@JvmStatic
+	fun JsonObject.addIfNotNull(key: String, value: Component?) {
+		if (value != null) {
+			val element = ComponentSerialization.CODEC
+				.encodeStart(JsonOps.INSTANCE, value)
+				.result()
+				.orElseThrow()
+			this.add(key, element)
 		}
 	}
 
