@@ -8,7 +8,6 @@ import dev.aaronhowser.mods.patchoulidatagen.page.PageType
  *
  * See [Page Types - Empty Pages](https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/page-types/#empty-pages)
  */
-
 class EmptyPage private constructor(
 	private val drawFiller: Boolean
 ) : PageType {
