@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.PageType
 import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
@@ -36,8 +37,8 @@ class BookEntry private constructor(
 			for (page in pages) {
 				val pageJson = JsonObject()
 
-				pageJson.addProperty("type", page.pageTypeId)
-				page.toJson(pageJson)
+				pageJson.addProperty("type", page.getPageTypeId())
+				page.addToJson(pageJson)
 
 				pagesArray.add(pageJson)
 			}
@@ -57,7 +58,7 @@ class BookEntry private constructor(
 
 	companion object {
 		@JvmStatic
-		fun setup() = Builder.entry()
+		fun builder() = Builder.entry()
 	}
 
 	class Builder private constructor() {

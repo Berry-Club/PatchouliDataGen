@@ -83,7 +83,7 @@ class BookHeader private constructor(
 
 	companion object {
 		@JvmStatic
-		fun setup() = Builder.header()
+		fun builder() = Builder.header()
 	}
 
 	class Builder private constructor() {

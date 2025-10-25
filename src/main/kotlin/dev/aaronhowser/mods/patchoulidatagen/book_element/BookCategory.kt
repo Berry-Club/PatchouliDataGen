@@ -40,7 +40,7 @@ class BookCategory private constructor(
 
 	companion object {
 		@JvmStatic
-		fun setup(): Builder = Builder.category()
+		fun builder(): Builder = Builder.category()
 	}
 
 	class Builder private constructor() {
@@ -52,7 +52,7 @@ class BookCategory private constructor(
 		private var sortNum: Int? = null
 		private var secret: Boolean = false
 
-		fun setBookHeader(header: BookHeader): Builder {
+		fun header(header: BookHeader): Builder {
 			this.bookHeader = header
 			return this
 		}

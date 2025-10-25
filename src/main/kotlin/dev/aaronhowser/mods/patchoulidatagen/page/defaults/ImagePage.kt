@@ -47,7 +47,7 @@ class ImagePage private constructor(
 		private var border: String? = null
 		private var text: String? = null
 
-		fun addImages(vararg images: ResourceLocation): Builder {
+		fun addImage(vararg images: ResourceLocation): Builder {
 			this.images.addAll(images)
 			return this
 		}
