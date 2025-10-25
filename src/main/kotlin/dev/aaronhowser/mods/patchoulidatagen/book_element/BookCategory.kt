@@ -1,7 +1,7 @@
 package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonObject
-import net.minecraft.core.registries.BuiltInRegistries
+import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 
@@ -20,28 +20,18 @@ class BookCategory private constructor(
 	override fun toJson(): JsonObject {
 		val json = JsonObject()
 
-		json.addProperty(TITLE, this.title)
-		json.addProperty(DESCRIPTION, this.description)
-		json.addProperty(ICON, BuiltInRegistries.ITEM.getKey(this.icon.asItem()).toString())
-
-		if (this.sortNum != null) {
-			json.addProperty(SORT_NUM, this.sortNum)
+		json.apply {
+			addProperty("title", title)
+			addProperty("description", description)
+			addProperty("icon", icon.asItem().toString()) //TODO: Is this correct?
+			addIfNotNull("sort_num", sortNum)
+			addProperty("secret", secret)
 		}
-
-		json.addProperty(SECRET, this.secret)
 
 		return json
 	}
 
 	fun getCategoryId(): ResourceLocation {
 		return ResourceLocation.fromNamespaceAndPath(header.getBookId(), this.getSaveName())
-	}
-
-	companion object {
-		const val TITLE = "title"
-		const val DESCRIPTION = "description"
-		const val ICON = "icon"
-		const val SORT_NUM = "sort_num"
-		const val SECRET = "secret"
 	}
 }
