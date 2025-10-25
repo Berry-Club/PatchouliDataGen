@@ -12,6 +12,11 @@ object Util {
 	fun Boolean?.isNotTrue(): Boolean = this != true
 
 	@JvmStatic
+	fun JsonObject.addProperty(key: String, value: ResourceLocation) {
+		this.addProperty(key, value.toString())
+	}
+
+	@JvmStatic
 	fun JsonObject.addIfNotNull(key: String, value: String?) {
 		if (value != null) {
 			this.addProperty(key, value)

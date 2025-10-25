@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.Util.addProperty
 import dev.aaronhowser.mods.patchoulidatagen.page.PageType
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -23,7 +24,7 @@ class CraftingRecipePage private constructor(
 
 	override fun addToJson(json: JsonObject) {
 		json.apply {
-			addProperty("recipe", recipeOne.toString())
+			addProperty("recipe", recipeOne)
 			addIfNotNull("recipe2", recipeTwo)
 			addIfNotNull("title", title)
 			addIfNotNull("text", text)
