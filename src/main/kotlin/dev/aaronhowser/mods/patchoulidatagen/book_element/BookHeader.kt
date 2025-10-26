@@ -65,7 +65,7 @@ class BookHeader private constructor(
 			addIfNotNull("flip_sound", flipSound)
 			addIfNotNull("show_progress", showProgress)
 			addIfNotNull("version", version)
-			addProperty("subtitle", subtitle)
+			addIfNotNull("subtitle", subtitle)
 			addIfNotNull("creative_tab", creativeTab)
 			addIfNotNull("advancement_tab", advancementTab)
 			addIfNotNull("do_not_generate_book", doNotGenerateBook)
@@ -92,7 +92,6 @@ class BookHeader private constructor(
 		private var landingTextComponent: Component? = null
 		private var nameText: String? = null
 		private var landingTextText: String? = null
-		private var saveName: String? = null
 
 		private var bookTexture: ResourceLocation? = null
 		private var fillerTexture: String? = null
@@ -115,8 +114,8 @@ class BookHeader private constructor(
 		private var customBookItem: Item? = null
 		private var showToast: Boolean? = null
 		private var useBlockyFont: Boolean? = null
-		private var i18n: Boolean = false
-		private var pauseGame = false
+		private var i18n: Boolean? = null
+		private var pauseGame: Boolean? = null
 		private var icon: ResourceLocation? = null
 		private var bookId: String? = null
 
@@ -270,7 +269,7 @@ class BookHeader private constructor(
 			val finalName: String
 			val finalLandingText: String
 
-			if (i18n) {
+			if (i18n.isTrue()) {
 				finalName = nameComponent?.string
 					?: error("Name component must be set when i18n is enabled!")
 				finalLandingText = landingTextComponent?.string

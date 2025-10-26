@@ -1,6 +1,4 @@
 {
-  "i18n": false,
   "landing_text": "This book was generated using the Patchouli DataGen library in Kotlin.",
-  "name": "Generated via Kotlin!",
-  "pause_game": false
+  "name": "Generated via Kotlin!"
 }
