@@ -28,6 +28,21 @@ class TextPage private constructor(
 	companion object {
 		@JvmStatic
 		fun builder(): Builder = Builder.create()
+
+		@JvmStatic
+		fun basicTextPage(title: String, text: String): TextPage {
+			return builder()
+				.title(title)
+				.text(text)
+				.build()
+		}
+
+		@JvmStatic
+		fun basicTextPage(text: String): TextPage {
+			return builder()
+				.text(text)
+				.build()
+		}
 	}
 
 	class Builder : AbstractPage.Builder<TextPage, Builder>() {
