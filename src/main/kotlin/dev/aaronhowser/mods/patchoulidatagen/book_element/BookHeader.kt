@@ -76,6 +76,7 @@ class BookHeader private constructor(
 			addIfNotNull("pause_game", pauseGame)
 			addIfNotNull("icon", icon)
 
+			addProperty("use_resource_pack", true)
 		}
 
 		return json
