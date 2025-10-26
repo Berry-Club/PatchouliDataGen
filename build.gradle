@@ -187,11 +187,7 @@ unifiedPublishing {
             }
 
             depends {
-                curseforge = modrinth = "curios"
-            }
-
-            optional {
-                curseforge = modrinth = "modonomicon"
+                curseforge = modrinth = "patchouli"
             }
         }
 
