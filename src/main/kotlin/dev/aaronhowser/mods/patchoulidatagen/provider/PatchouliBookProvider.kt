@@ -17,13 +17,13 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 
 abstract class PatchouliBookProvider(
-	private val generator: DataGenerator,
-	private val existingFileHelper: ExistingFileHelper?,
-	private val bookName: String,
-	private val modId: String
+	protected val generator: DataGenerator,
+	protected val existingFileHelper: ExistingFileHelper?,
+	protected val bookName: String,
+	protected val modId: String
 ) : DataProvider {
 
-	private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
+	protected val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
 	constructor(
 		generator: DataGenerator,
