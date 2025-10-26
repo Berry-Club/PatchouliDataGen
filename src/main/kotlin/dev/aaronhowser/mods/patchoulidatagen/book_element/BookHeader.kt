@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item
 import java.util.function.Consumer
 
 class BookHeader private constructor(
-	private val bookId: String,
+	private val bookModId: String,
 	private val name: String,
 	private val landingText: String,
 	private val bookTexture: ResourceLocation?,
@@ -41,7 +41,7 @@ class BookHeader private constructor(
 
 	override fun getSaveName(): String = "book"
 
-	fun getBookId(): String = bookId
+	fun getBookModId(): String = bookModId
 	fun isTranslatable(): Boolean = i18n.isTrue()
 
 	override fun toJson(): JsonObject {
@@ -118,7 +118,7 @@ class BookHeader private constructor(
 		private var i18n: Boolean? = null
 		private var pauseGame: Boolean? = null
 		private var icon: ResourceLocation? = null
-		private var bookId: String? = null
+		private var bookModId: String? = null
 
 		/** Use if it's translatable */
 		fun setBookComponent(
@@ -132,14 +132,14 @@ class BookHeader private constructor(
 
 			this.nameComponent = name
 			this.landingTextComponent = landingText
-			this.bookId = bookId
+			this.bookModId = bookId
 
 			return this
 		}
 
 		/** Use if it's not translatable */
 		fun setBookText(
-			bookId: String,
+			bookModId: String,
 			name: String,
 			landingText: String
 		): Builder {
@@ -149,7 +149,7 @@ class BookHeader private constructor(
 
 			this.nameText = name
 			this.landingTextText = landingText
-			this.bookId = bookId
+			this.bookModId = bookModId
 
 			return this
 		}
@@ -280,10 +280,10 @@ class BookHeader private constructor(
 				finalLandingText = landingTextText ?: error("Landing text must be set when i18n is disabled!")
 			}
 
-			requireNotNull(this.bookId) { "Book ID must be set!" }
+			requireNotNull(this.bookModId) { "Book ID must be set!" }
 
 			val header = BookHeader(
-				bookId = this.bookId!!,
+				bookModId = this.bookModId!!,
 				name = finalName,
 				landingText = finalLandingText,
 				bookTexture = this.bookTexture,

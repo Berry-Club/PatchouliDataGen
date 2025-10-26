@@ -35,7 +35,7 @@ class BookCategory private constructor(
 	}
 
 	fun getCategoryId(): ResourceLocation {
-		return ResourceLocation.fromNamespaceAndPath(header.getBookId(), this.getSaveName())
+		return ResourceLocation.fromNamespaceAndPath(header.getBookModId(), this.getSaveName())
 	}
 
 	companion object {

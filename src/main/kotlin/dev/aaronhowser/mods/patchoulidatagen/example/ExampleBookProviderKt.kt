@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.patchoulidatagen.example
 
+import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
@@ -25,7 +26,7 @@ class ExampleBookProviderKt(
 
 		val header = BookHeader.builder()
 			.setBookText(
-				bookId = "$modId.book.kt",
+				bookModId = PatchouliDataGen.MOD_ID,
 				name = "Generated via Kotlin!",
 				landingText = "This book was generated using the Patchouli DataGen library in Kotlin."
 			)
