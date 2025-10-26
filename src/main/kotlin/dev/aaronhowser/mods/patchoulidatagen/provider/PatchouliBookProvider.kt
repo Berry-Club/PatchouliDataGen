@@ -39,7 +39,7 @@ abstract class PatchouliBookProvider(
 		val dataFolder = generator.packOutput
 
 		val bookLocations = mutableSetOf<String>()
-		val bookDefaultPath = "data/$modId/patchouli_books/$bookName/en_us"
+		val bookDefaultPath = "assets/$modId/patchouli_books/$bookName/en_us"
 
 		val futures = mutableListOf<CompletableFuture<*>>()
 
