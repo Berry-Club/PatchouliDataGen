@@ -33,6 +33,23 @@ class SpotlightPage private constructor(
 	companion object {
 		@JvmStatic
 		fun builder() = Builder.builder()
+
+		@JvmStatic
+		fun basicPage(spotlightItem: ItemLike, title: String, text: String): SpotlightPage {
+			return builder()
+				.item(spotlightItem)
+				.title(title)
+				.text(text)
+				.build()
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItem: ItemLike, text: String): SpotlightPage {
+			return builder()
+				.item(spotlightItem)
+				.text(text)
+				.build()
+		}
 	}
 
 	class Builder private constructor() : AbstractPage.Builder<SpotlightPage, Builder>() {
