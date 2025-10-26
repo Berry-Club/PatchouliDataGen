@@ -10,6 +10,7 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
+import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
@@ -130,7 +131,7 @@ class ExampleBookProviderKt(
 						lines(
 							"This is a line of text.",
 							"Here's another line of text.",
-							"${DARK_GREEN}DARK GREEN${RESET} text!"
+							"${TextColor.DARK_GREEN}DARK GREEN${RESET} text!"
 						)
 					)
 					.build()
@@ -152,12 +153,14 @@ class ExampleBookProviderKt(
 					.text(
 						StringBuilder()
 							.append(
-								"${LI}${RED}list${LI}next line but still red because of no reset"
+								"${LI}${TextColor.RED}list${LI}next line but still red because of no reset"
 							)
 							.append(BR)
 							.append("Not in the list any more but STILL RED!")
 							.append(BR)
 							.append("${RESET}Now it's good :)")
+							.append(BR)
+							.append(colored(TextColor.GOLD, "This is gold text using the Color enum!"))
 							.toString()
 					)
 					.build()

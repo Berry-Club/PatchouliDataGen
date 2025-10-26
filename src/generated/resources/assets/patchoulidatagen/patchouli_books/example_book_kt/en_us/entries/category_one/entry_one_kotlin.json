@@ -15,7 +15,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(c)list$(li)next line but still red because of no reset$(br)Not in the list any more but STILL RED!$(br)$()Now it's good :)"
+      "text": "$(li)$(c)list$(li)next line but still red because of no reset$(br)Not in the list any more but STILL RED!$(br)$()Now it's good :)$(br)$(6)This is gold text using the Color enum!$()"
     },
     {
       "type": "patchouli:crafting",

@@ -104,28 +104,39 @@ abstract class PatchouliBookProvider(
 		const val LI2 = "$(li2)"
 		const val LI3 = "$(li3)"
 
-		const val BLACK = "$(0)"
-		const val DARK_BLUE = "$(1)"
-		const val DARK_GREEN = "$(2)"
-		const val DARK_AQUA = "$(3)"
-		const val DARK_RED = "$(4)"
-		const val DARK_PURPLE = "$(5)"
-		const val GOLD = "$(6)"
-		const val GRAY = "$(7)"
-		const val DARK_GRAY = "$(8)"
-		const val BLUE = "$(9)"
-		const val GREEN = "$(a)"
-		const val AQUA = "$(b)"
-		const val RED = "$(c)"
-		const val LIGHT_PURPLE = "$(d)"
-		const val YELLOW = "$(e)"
-		const val WHITE = "$(f)"
-
 		const val OBFUSCATED = "$(k)"
 		const val BOLD = "$(l)"
 		const val STRIKETHROUGH = "$(m)"
 		const val UNDERLINE = "$(n)"
 		const val ITALIC = "$(o)"
+
+		enum class TextColor(val code: String) {
+			BLACK("$(0)"),
+			DARK_BLUE("$(1)"),
+			DARK_GREEN("$(2)"),
+			DARK_AQUA("$(3)"),
+			DARK_RED("$(4)"),
+			DARK_PURPLE("$(5)"),
+			GOLD("$(6)"),
+			GRAY("$(7)"),
+			DARK_GRAY("$(8)"),
+			BLUE("$(9)"),
+			GREEN("$(a)"),
+			AQUA("$(b)"),
+			RED("$(c)"),
+			LIGHT_PURPLE("$(d)"),
+			YELLOW("$(e)"),
+			WHITE("$(f)");
+
+			override fun toString(): String {
+				return code
+			}
+		}
+
+		@JvmStatic
+		fun colored(textColor: TextColor, text: String): String {
+			return "${textColor.code}$text$RESET"
+		}
 
 		@JvmStatic
 		fun internalLink(
