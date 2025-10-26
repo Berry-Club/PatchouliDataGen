@@ -28,14 +28,40 @@ class LinkPage(
 
 	companion object {
 		@JvmStatic
-		fun setup(
+		fun builder(): Builder = Builder.setup()
+	}
+
+	class Builder private constructor() : AbstractPage.Builder<Builder, LinkPage>() {
+		private var url: String? = null
+		private var linkText: String? = null
+
+		fun button(
 			url: String,
 			linkText: String
-		): LinkPage {
+		): Builder {
+			this.url = url
+			this.linkText = linkText
+			return this
+		}
+
+		override fun build(): LinkPage {
+			requireNotNull(url) { "URL must be set" }
+			requireNotNull(linkText) { "Link text must be set" }
+
 			return LinkPage(
-				url = url,
-				linkText = linkText
+				url = url!!,
+				linkText = linkText!!,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
+		}
+
+		companion object {
+			@JvmStatic
+			fun setup(): Builder {
+				return Builder()
+			}
 		}
 	}
 }
