@@ -16,7 +16,7 @@ class BookCategory private constructor(
 	private val secret: Boolean?,
 	private val parent: String?,
 	private val saveName: String,
-	private val header: Book
+	private val book: Book
 ) : BookElement {
 
 	override fun getSaveName(): String = this.saveName
@@ -37,7 +37,7 @@ class BookCategory private constructor(
 	}
 
 	fun getCategoryId(): ResourceLocation {
-		return ResourceLocation.fromNamespaceAndPath(header.getBookModId(), this.getSaveName())
+		return ResourceLocation.fromNamespaceAndPath(book.getBookModId(), this.getSaveName())
 	}
 
 	companion object {
@@ -55,8 +55,8 @@ class BookCategory private constructor(
 		private var secret: Boolean? = null
 		private var parent: String? = null
 
-		fun header(header: Book): Builder {
-			this.book = header
+		fun book(book: Book): Builder {
+			this.book = book
 			return this
 		}
 
@@ -70,7 +70,7 @@ class BookCategory private constructor(
 			}
 
 			if (book?.isTranslatable().isNotTrue()) {
-				error("Cannot use a Component name or description with a non-translatable BookHeader")
+				error("Cannot use a Component name or description with a non-translatable Book")
 			}
 
 			this.name = name.string
@@ -131,7 +131,7 @@ class BookCategory private constructor(
 			}
 
 			if (book == null) {
-				error("BookHeader has not been set!")
+				error("Book has not been set!")
 			}
 
 			val bookCategory = BookCategory(
@@ -141,7 +141,7 @@ class BookCategory private constructor(
 				sortNum = this.sortNum,
 				secret = this.secret,
 				saveName = saveName,
-				header = this.book!!,
+				book = this.book!!,
 				parent = this.parent
 			)
 

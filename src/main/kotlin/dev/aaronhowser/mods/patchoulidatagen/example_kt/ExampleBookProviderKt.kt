@@ -32,7 +32,7 @@ class ExampleBookProviderKt(
 			.save(consumer)
 
 		val categoryOne = BookCategory.builder()
-			.header(header)
+			.book(header)
 			.setDisplay(
 				name = "Category One",
 				description = "This is the first category in the Kotlin-generated book.",
@@ -41,7 +41,7 @@ class ExampleBookProviderKt(
 			.save(consumer, "category_one")
 
 		val innerCategory = BookCategory.builder()
-			.header(header)
+			.book(header)
 			.setDisplay(
 				name = "Inner Category",
 				description = "This is a sub-category inside Category One.",
