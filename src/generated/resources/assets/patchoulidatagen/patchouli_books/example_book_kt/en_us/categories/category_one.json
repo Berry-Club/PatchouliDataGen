@@ -1,6 +1,5 @@
 {
   "description": "This is the first category in the Kotlin-generated book.",
   "icon": "minecraft:dirt",
-  "name": "Category One",
-  "secret": false
+  "name": "Category One"
 }

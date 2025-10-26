@@ -13,7 +13,7 @@ class BookCategory private constructor(
 	private val description: String,
 	private val icon: ItemLike,
 	private val sortNum: Int?,
-	private val secret: Boolean,
+	private val secret: Boolean?,
 	private val saveName: String,
 	private val header: BookHeader
 ) : BookElement {
@@ -28,7 +28,7 @@ class BookCategory private constructor(
 			addProperty("description", description)
 			addProperty("icon", icon.asItem().toString()) //TODO: Is this correct?
 			addIfNotNull("sort_num", sortNum)
-			addProperty("secret", secret)
+			addIfNotNull("secret", secret)
 		}
 
 		return json
@@ -50,7 +50,7 @@ class BookCategory private constructor(
 		private var description: String? = null
 		private var icon: ItemLike? = null
 		private var sortNum: Int? = null
-		private var secret: Boolean = false
+		private var secret: Boolean? = null
 
 		fun header(header: BookHeader): Builder {
 			this.bookHeader = header
