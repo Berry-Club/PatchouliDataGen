@@ -5,7 +5,7 @@ import com.khanhpham.patchoulidatagen.provider.PatchouliBookProvider;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry;
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookHeader;
+import dev.aaronhowser.mods.patchoulidatagen.book_element.Book;
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.PatchouliMultiblock;
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.*;
 import net.minecraft.core.Direction;
@@ -30,7 +30,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 
 	@Override
 	protected void buildPages(Consumer<BookElement> consumer) {
-		BookHeader header = BookHeader.builder()
+		Book header = Book.builder()
 				.enableI18n()
 				.setBookComponent(
 						modid, translate("test_book.name"),

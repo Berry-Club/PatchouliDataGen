@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement;
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry;
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookHeader;
+import dev.aaronhowser.mods.patchoulidatagen.book_element.Book;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -66,7 +66,7 @@ public abstract class PatchouliBookProvider implements DataProvider {
 							bookDefaultPath + "categories/" + category.getSaveName() + ".json"
 					);
 					this.saveData(gson, pOutput, category, categoryFolder);
-				} else if (element instanceof BookHeader header) {
+				} else if (element instanceof Book header) {
 					Path headerFolder = resolvePath(
 							dataFolder,
 							"data/" + modid + "/patchouli_books/" + bookName + "/book.json"

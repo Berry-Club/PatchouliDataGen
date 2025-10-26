@@ -16,7 +16,7 @@ class BookCategory private constructor(
 	private val secret: Boolean?,
 	private val parent: String?,
 	private val saveName: String,
-	private val header: BookHeader
+	private val header: Book
 ) : BookElement {
 
 	override fun getSaveName(): String = this.saveName
@@ -47,7 +47,7 @@ class BookCategory private constructor(
 
 	class Builder private constructor() {
 
-		private var bookHeader: BookHeader? = null
+		private var book: Book? = null
 		private var name: String? = null
 		private var description: String? = null
 		private var icon: ItemLike? = null
@@ -55,8 +55,8 @@ class BookCategory private constructor(
 		private var secret: Boolean? = null
 		private var parent: String? = null
 
-		fun header(header: BookHeader): Builder {
-			this.bookHeader = header
+		fun header(header: Book): Builder {
+			this.book = header
 			return this
 		}
 
@@ -69,7 +69,7 @@ class BookCategory private constructor(
 				error("Display properties have already been set!")
 			}
 
-			if (bookHeader?.isTranslatable().isNotTrue()) {
+			if (book?.isTranslatable().isNotTrue()) {
 				error("Cannot use a Component name or description with a non-translatable BookHeader")
 			}
 
@@ -130,7 +130,7 @@ class BookCategory private constructor(
 				error("Display properties have not been set!")
 			}
 
-			if (bookHeader == null) {
+			if (book == null) {
 				error("BookHeader has not been set!")
 			}
 
@@ -141,7 +141,7 @@ class BookCategory private constructor(
 				sortNum = this.sortNum,
 				secret = this.secret,
 				saveName = saveName,
-				header = this.bookHeader!!,
+				header = this.book!!,
 				parent = this.parent
 			)
 

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import java.util.function.Consumer
 
-class BookHeader private constructor(
+class Book private constructor(
 	private val bookModId: String,
 	private val name: String,
 	private val landingText: String,
@@ -260,13 +260,13 @@ class BookHeader private constructor(
 			return this
 		}
 
-		fun save(consumer: Consumer<BookElement>): BookHeader {
+		fun save(consumer: Consumer<BookElement>): Book {
 			val header = build()
 			consumer.accept(header)
 			return header
 		}
 
-		fun build(): BookHeader {
+		fun build(): Book {
 			val finalName: String
 			val finalLandingText: String
 
@@ -282,7 +282,7 @@ class BookHeader private constructor(
 
 			requireNotNull(this.bookModId) { "Book ID must be set!" }
 
-			val header = BookHeader(
+			val header = Book(
 				bookModId = this.bookModId!!,
 				name = finalName,
 				landingText = finalLandingText,

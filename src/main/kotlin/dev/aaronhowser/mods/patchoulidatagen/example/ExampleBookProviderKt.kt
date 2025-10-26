@@ -4,7 +4,7 @@ import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookHeader
+import dev.aaronhowser.mods.patchoulidatagen.book_element.Book
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
@@ -24,7 +24,7 @@ class ExampleBookProviderKt(
 
 	override fun buildPages(consumer: Consumer<BookElement>) {
 
-		val header = BookHeader.builder()
+		val header = Book.builder()
 			.setBookText(
 				bookModId = PatchouliDataGen.MOD_ID,
 				name = "Generated via Kotlin!",

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookHeader
+import dev.aaronhowser.mods.patchoulidatagen.book_element.Book
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
@@ -70,7 +70,7 @@ abstract class PatchouliBookProvider(
 					saveData(futures, gson, output, element, categoryFolder)
 				}
 
-				is BookHeader -> {
+				is Book -> {
 					val headerFolder = resolvePath(
 						dataFolder,
 						"data/$modId/patchouli_books/$bookName/${element.getSaveName()}.json"
