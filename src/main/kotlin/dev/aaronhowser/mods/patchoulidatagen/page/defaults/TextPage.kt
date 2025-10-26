@@ -2,12 +2,17 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 
 class TextPage private constructor(
 	private val text: String,
-	private val title: String?
-) : PageType {
+	private val title: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "text"
 
@@ -23,7 +28,7 @@ class TextPage private constructor(
 		fun builder(): Builder = Builder.create()
 	}
 
-	class Builder {
+	class Builder : AbstractPage.Builder<TextPage.Builder>() {
 		private var text: String? = null
 		private var title: String? = null
 
@@ -51,7 +56,10 @@ class TextPage private constructor(
 			requireNotNull(text) { "TextPage text must be set!" }
 			return TextPage(
 				text = text!!,
-				title = title
+				title = title,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

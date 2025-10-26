@@ -29,24 +29,25 @@ abstract class AbstractPage(
 
 	open fun getPageTypeId(): String = getPageTypeLocation().toString()
 
-	abstract class Builder protected constructor() {
+	@Suppress("UNCHECKED_CAST")
+	abstract class Builder<T: Builder<T>> protected constructor() {
 		protected var advancement: ResourceLocation? = null
 		protected var flag: String? = null
 		protected var anchor: String? = null
 
-		fun advancement(advancement: ResourceLocation): Builder {
+		fun advancement(advancement: ResourceLocation): T {
 			this.advancement = advancement
-			return this
+			return this as T
 		}
 
-		fun flag(flag: String): Builder {
+		fun flag(flag: String): T {
 			this.flag = flag
-			return this
+			return this as T
 		}
 
-		fun anchor(anchor: String): Builder {
+		fun anchor(anchor: String): T {
 			this.anchor = anchor
-			return this
+			return this as T
 		}
 	}
 

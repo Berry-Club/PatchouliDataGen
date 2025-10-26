@@ -41,7 +41,7 @@ class CraftingRecipePage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder() {
+	class Builder private constructor() : AbstractPage.Builder<CraftingRecipePage.Builder>() {
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
 		private var title: String? = null

@@ -94,6 +94,7 @@ class ExampleBookProviderKt(
 				CraftingRecipePage.builder()
 					.mainRecipe(Items.STICK)
 					.text(Component.translatable("item.minecraft.stick"))
+					.anchor("anchor")
 					.build()
 			)
 			.display("One!!!", Items.APPLE)
