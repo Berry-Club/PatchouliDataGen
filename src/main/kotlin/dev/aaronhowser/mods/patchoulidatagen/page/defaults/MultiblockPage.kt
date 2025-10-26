@@ -2,8 +2,8 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
-import dev.aaronhowser.mods.patchoulidatagen.page.PageType
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.Multiblock
+import dev.aaronhowser.mods.patchoulidatagen.page.PageType
 import net.minecraft.network.chat.Component
 
 /**
