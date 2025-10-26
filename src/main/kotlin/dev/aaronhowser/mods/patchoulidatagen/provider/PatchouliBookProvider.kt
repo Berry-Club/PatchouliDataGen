@@ -71,7 +71,7 @@ abstract class PatchouliBookProvider(
 				is BookHeader -> {
 					val headerFolder = resolvePath(
 						dataFolder,
-						"data/$modId/patchouli_books/$bookName/book.json"
+						"data/$modId/patchouli_books/$bookName/${element.getSaveName()}.json"
 					)
 
 					saveData(gson, output, element, headerFolder)
