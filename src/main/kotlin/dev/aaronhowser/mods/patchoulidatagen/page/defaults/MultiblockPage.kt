@@ -43,19 +43,23 @@ class MultiblockPage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor(): AbstractPage.Builder<MultiblockPage, Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<MultiblockPage, Builder>() {
 		private var multiBlockName: String? = null
 		private var multiblock: Multiblock? = null
 		private var multiblockId: String? = null
 		private var enableVisualize: Boolean? = null
 		private var text: Component? = null
 
+		fun name(multiblockName: String): Builder {
+			this.multiBlockName = multiblockName
+			return this
+		}
+
 		fun multiblock(
 			multiblockName: String,
-			multiblockBuilder: Multiblock.Builder
+			multiblockBuilder: Multiblock
 		): Builder {
-			this.multiBlockName = multiblockName
-			this.multiblock = multiblockBuilder.build()
+			this.multiblock = multiblockBuilder
 			return this
 		}
 
@@ -75,7 +79,11 @@ class MultiblockPage private constructor(
 		}
 
 		override fun build(): MultiblockPage {
-			require(multiBlockName != null && multiblock != null) { "Multiblock name must be set" }
+			require(multiBlockName != null) { "Multiblock name must be set" }
+
+			require(multiblock != null || multiblockId != null) {
+				"Either a multiblock or multiblock id must be set"
+			}
 
 			return MultiblockPage(
 				multiblockName = multiBlockName!!,
