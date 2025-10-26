@@ -24,7 +24,6 @@ class ExampleBookProviderKt(
 	override fun buildPages(consumer: Consumer<BookElement>) {
 
 		val header = BookHeader.builder()
-			.enableI18n()
 			.setBookText(
 				bookId = "$modId.book.kt",
 				name = "Generated via Kotlin!",

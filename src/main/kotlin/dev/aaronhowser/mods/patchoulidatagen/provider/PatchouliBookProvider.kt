@@ -46,7 +46,7 @@ abstract class PatchouliBookProvider(
 
 			if (addedSuccessfully) {
 				val rl = ResourceLocation.fromNamespaceAndPath(modId, element.getSaveName())
-				error("Duplicate book page [$rl]")
+				error("Duplicate book element [$rl]")
 			}
 
 			when (element) {
