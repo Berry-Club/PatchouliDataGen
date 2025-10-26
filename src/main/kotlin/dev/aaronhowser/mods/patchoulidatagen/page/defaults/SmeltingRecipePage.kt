@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.Util.addProperty
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -12,8 +13,11 @@ class SmeltingRecipePage private constructor(
 	private val recipeOne: ResourceLocation,
 	private val recipeTwo: ResourceLocation?,
 	private val title: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "smelting"
 
@@ -31,7 +35,7 @@ class SmeltingRecipePage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder<Builder>(){
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
 		private var title: String? = null
@@ -86,7 +90,10 @@ class SmeltingRecipePage private constructor(
 				recipeOne = recipeOne,
 				recipeTwo = recipeTwo,
 				title = title,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

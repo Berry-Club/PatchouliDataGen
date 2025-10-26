@@ -2,7 +2,9 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 
 /**
  * This is an empty page with no text
@@ -12,8 +14,11 @@ import net.minecraft.network.chat.Component
 class QuestPage private constructor(
 	private val trigger: String?,
 	private val title: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "quest"
 
@@ -30,7 +35,7 @@ class QuestPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder<Builder>(){
 		private var trigger: String? = null
 		private var title: String? = null
 		private var text: String? = null
@@ -69,7 +74,10 @@ class QuestPage private constructor(
 			return QuestPage(
 				trigger = trigger,
 				title = title,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

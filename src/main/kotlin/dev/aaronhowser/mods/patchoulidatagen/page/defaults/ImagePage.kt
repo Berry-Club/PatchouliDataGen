@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 
@@ -15,8 +16,11 @@ class ImagePage private constructor(
 	private val images: Array<ResourceLocation>,
 	private val title: String?,
 	private val border: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "image"
 
@@ -40,7 +44,7 @@ class ImagePage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder<Builder>() {
 		private val images = mutableListOf<ResourceLocation>()
 		private var title: String? = null
 		private var border: String? = null
@@ -78,7 +82,10 @@ class ImagePage private constructor(
 				images = images.toTypedArray(),
 				title = title,
 				border = border,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

@@ -3,7 +3,9 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 
 /**
  * This is an empty page with no text
@@ -13,8 +15,11 @@ import net.minecraft.network.chat.Component
 class RelationsPage private constructor(
 	private val entries: Array<String>,
 	private val title: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "relations"
 
@@ -36,7 +41,7 @@ class RelationsPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder<Builder>() {
 		private val entries: MutableList<String> = mutableListOf()
 		private var title: String? = null
 		private var text: String? = null
@@ -73,9 +78,12 @@ class RelationsPage private constructor(
 			require(entries.isNotEmpty()) { "At least one entry must be added to RelationsPage" }
 
 			return RelationsPage(
-				entries.toTypedArray(),
-				title,
-				text
+				entries = entries.toTypedArray(),
+				title = title,
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

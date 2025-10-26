@@ -1,6 +1,8 @@
 package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.resources.ResourceLocation
 
 /**
  * This is an empty page with no text
@@ -9,8 +11,11 @@ import com.google.gson.JsonObject
  */
 class LinkPage(
 	private val url: String,
-	private val linkText: String
-) : PageType {
+	private val linkText: String,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "link"
 

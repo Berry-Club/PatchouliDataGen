@@ -2,7 +2,9 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.EntityType
 
 /**
@@ -17,8 +19,11 @@ class EntityPage private constructor(
 	private val rotate: Boolean?,
 	private val defaultRotation: Float?,
 	private val name: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "entity"
 
@@ -39,7 +44,7 @@ class EntityPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder<Builder>() {
 
 		private var entity: String? = null
 		private var scale: Float? = null
@@ -103,7 +108,10 @@ class EntityPage private constructor(
 				rotate = rotate,
 				defaultRotation = defaultRotation,
 				name = name,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

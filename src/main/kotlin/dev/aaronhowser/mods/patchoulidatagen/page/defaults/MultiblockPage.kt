@@ -3,7 +3,9 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.Multiblock
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 
 /**
  * This is an empty page with no text
@@ -15,8 +17,11 @@ class MultiblockPage private constructor(
 	private val multiblock: Multiblock,
 	private val multiblockId: String?,
 	private val enableVisualize: Boolean?,
-	private val text: Component?
-) : PageType {
+	private val text: Component?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "multiblock"
 
@@ -36,7 +41,7 @@ class MultiblockPage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor(): AbstractPage.Builder<Builder>() {
 		private var multiBlockName: String? = null
 		private var multiblock: Multiblock? = null
 		private var multiblockId: String? = null
@@ -75,7 +80,10 @@ class MultiblockPage private constructor(
 				multiblock = multiblock!!,
 				multiblockId = multiblockId,
 				enableVisualize = enableVisualize,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 
