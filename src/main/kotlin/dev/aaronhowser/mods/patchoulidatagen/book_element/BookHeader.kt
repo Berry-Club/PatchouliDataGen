@@ -260,7 +260,13 @@ class BookHeader private constructor(
 			return this
 		}
 
-		fun build(consumer: Consumer<BookElement>): BookHeader {
+		fun save(consumer: Consumer<BookElement>): BookHeader {
+			val header = build()
+			consumer.accept(header)
+			return header
+		}
+
+		fun build(): BookHeader {
 			val finalName: String
 			val finalLandingText: String
 
@@ -306,7 +312,6 @@ class BookHeader private constructor(
 				icon = this.icon
 			)
 
-			consumer.accept(header)
 			return header
 		}
 

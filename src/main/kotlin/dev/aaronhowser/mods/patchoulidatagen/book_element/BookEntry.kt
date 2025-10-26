@@ -133,10 +133,12 @@ class BookEntry private constructor(
 		}
 
 		fun save(consumer: Consumer<BookElement>, saveName: String): BookEntry {
-			return build(consumer, saveName)
+			val entry = build(saveName)
+			consumer.accept(entry)
+			return entry
 		}
 
-		private fun build(consumer: Consumer<BookElement>, saveName: String): BookEntry {
+		fun build(saveName: String): BookEntry {
 
 			require(category != null) { "BookEntry $saveName is missing category!" }
 			require(name != null && icon != null) { "BookEntry $saveName is missing display!" }
@@ -156,7 +158,6 @@ class BookEntry private constructor(
 				turnIn
 			)
 
-			consumer.accept(entry)
 			return entry
 		}
 

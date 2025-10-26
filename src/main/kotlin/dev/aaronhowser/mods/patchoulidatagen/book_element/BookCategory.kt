@@ -107,10 +107,12 @@ class BookCategory private constructor(
 		}
 
 		fun save(consumer: Consumer<BookElement>, saveName: String): BookCategory {
-			return build(consumer, saveName)
+			val category = build(saveName)
+			consumer.accept(category)
+			return category
 		}
 
-		private fun build(consumer: Consumer<BookElement>, saveName: String): BookCategory {
+		private fun build(saveName: String): BookCategory {
 			if (title == null || description == null || icon == null) {
 				error("Display properties have not been set!")
 			}
@@ -129,7 +131,6 @@ class BookCategory private constructor(
 				header = this.bookHeader!!
 			)
 
-			consumer.accept(bookCategory)
 			return bookCategory
 		}
 

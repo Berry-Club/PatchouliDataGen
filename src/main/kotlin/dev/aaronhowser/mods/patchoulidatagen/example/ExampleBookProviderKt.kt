@@ -29,7 +29,7 @@ class ExampleBookProviderKt(
 				name = "Generated via Kotlin!",
 				landingText = "This book was generated using the Patchouli DataGen library in Kotlin."
 			)
-			.build(consumer)
+			.save(consumer)
 
 		val categoryOne = BookCategory.builder()
 			.header(header)
