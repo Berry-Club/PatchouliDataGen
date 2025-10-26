@@ -33,7 +33,7 @@ class ExampleBookProviderKt(
 		val categoryOne = PatchouliBookCategory.builder()
 			.book(book)
 			.setDisplay(
-				name = "Category One",
+				name = "Category One Java",
 				description = "This is the first category in the Kotlin-generated book.",
 				icon = Items.DIRT
 			)
@@ -64,7 +64,7 @@ class ExampleBookProviderKt(
 			.addPage(textPage)
 			.addPage(craftingPage)
 			.display("One!!!", Items.APPLE)
-			.save(consumer, "entry_one")
+			.save(consumer, "entry_one_kotlin")
 
 	}
 
