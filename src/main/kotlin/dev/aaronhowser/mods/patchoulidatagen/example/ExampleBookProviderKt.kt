@@ -53,6 +53,7 @@ class ExampleBookProviderKt(
 
 		val craftingPage = CraftingRecipePage.builder()
 			.mainRecipe(Items.STICK)
+			.text(Component.translatable("item.minecraft.stick"))
 			.build()
 
 		BookEntry.builder()

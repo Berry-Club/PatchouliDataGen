@@ -10,7 +10,8 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "minecraft:stick"
+      "recipe": "minecraft:stick",
+      "text": "Stick"
     }
   ]
 }
