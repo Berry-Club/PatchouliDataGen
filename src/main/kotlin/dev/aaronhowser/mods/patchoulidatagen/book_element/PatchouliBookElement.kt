@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonObject
 
-interface BookElement {
+interface PatchouliBookElement {
 
 	fun getSaveName(): String
 	fun toJson(): JsonObject

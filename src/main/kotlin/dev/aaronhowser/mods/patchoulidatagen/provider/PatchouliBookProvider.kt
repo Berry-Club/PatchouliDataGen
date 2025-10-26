@@ -2,16 +2,15 @@ package dev.aaronhowser.mods.patchoulidatagen.provider
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.Book
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookCategory
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBook
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
 import net.minecraft.resources.ResourceLocation
-import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.nio.file.Path
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -36,7 +35,7 @@ abstract class PatchouliBookProvider(
 
 		val futures = mutableListOf<CompletableFuture<*>>()
 
-		val elementConsumer: Consumer<BookElement> = Consumer { element ->
+		val elementConsumer: Consumer<PatchouliBookElement> = Consumer { element ->
 			val addedSuccessfully = bookLocations.add(element.getSaveName())
 
 			if (!addedSuccessfully) {
@@ -45,7 +44,7 @@ abstract class PatchouliBookProvider(
 			}
 
 			when (element) {
-				is BookEntry -> {
+				is PatchouliPatchouliBookEntry -> {
 					val entryFolder = resolvePath(
 						dataFolder,
 						"$bookDefaultPath/entries/${element.getSaveName()}.json"
@@ -54,7 +53,7 @@ abstract class PatchouliBookProvider(
 					saveData(futures, gson, output, element, entryFolder)
 				}
 
-				is BookCategory -> {
+				is PatchouliPatchouliBookCategory -> {
 					val categoryFolder = resolvePath(
 						dataFolder,
 						"$bookDefaultPath/categories/${element.getSaveName()}.json"
@@ -63,7 +62,7 @@ abstract class PatchouliBookProvider(
 					saveData(futures, gson, output, element, categoryFolder)
 				}
 
-				is Book -> {
+				is PatchouliPatchouliBook -> {
 					val headerFolder = resolvePath(
 						dataFolder,
 						"data/$modId/patchouli_books/$bookName/${element.getSaveName()}.json"
@@ -80,7 +79,7 @@ abstract class PatchouliBookProvider(
 		return CompletableFuture.allOf(*futures.toTypedArray())
 	}
 
-	private fun <T : BookElement> saveData(
+	private fun <T : PatchouliBookElement> saveData(
 		futures: MutableList<CompletableFuture<*>>,
 		gson: Gson,    // unused currently
 		cache: CachedOutput,
@@ -95,6 +94,6 @@ abstract class PatchouliBookProvider(
 		return path.outputFolder.resolve(pathOther)
 	}
 
-	abstract fun buildPages(consumer: Consumer<BookElement>)
+	abstract fun buildPages(consumer: Consumer<PatchouliBookElement>)
 
 }

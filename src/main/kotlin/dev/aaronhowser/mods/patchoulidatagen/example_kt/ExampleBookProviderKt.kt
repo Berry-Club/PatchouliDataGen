@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.patchoulidatagen.example_kt
 
 import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.Book
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookCategory
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
@@ -19,9 +19,9 @@ class ExampleBookProviderKt(
 	modId: String
 ) : PatchouliBookProvider(generator, bookName, modId) {
 
-	override fun buildPages(consumer: Consumer<BookElement>) {
+	override fun buildPages(consumer: Consumer<PatchouliBookElement>) {
 
-		val header = Book.builder()
+		val patchouliBook = PatchouliPatchouliBook.builder()
 			.setBookText(
 				bookModId = PatchouliDataGen.MOD_ID,
 				name = "Generated via Kotlin!",
@@ -30,8 +30,8 @@ class ExampleBookProviderKt(
 			.creativeTab("minecraft:tools_and_utilities")
 			.save(consumer)
 
-		val categoryOne = BookCategory.builder()
-			.book(header)
+		val categoryOne = PatchouliPatchouliBookCategory.builder()
+			.book(patchouliBook)
 			.setDisplay(
 				name = "Category One",
 				description = "This is the first category in the Kotlin-generated book.",
@@ -39,8 +39,8 @@ class ExampleBookProviderKt(
 			)
 			.save(consumer, "category_one")
 
-		val innerCategory = BookCategory.builder()
-			.book(header)
+		val innerCategory = PatchouliPatchouliBookCategory.builder()
+			.book(patchouliBook)
 			.setDisplay(
 				name = "Inner Category",
 				description = "This is a sub-category inside Category One.",
@@ -59,7 +59,7 @@ class ExampleBookProviderKt(
 			.text(Component.translatable("item.minecraft.stick"))
 			.build()
 
-		BookEntry.builder()
+		PatchouliPatchouliBookEntry.builder()
 			.category(categoryOne)
 			.addPage(textPage)
 			.addPage(craftingPage)

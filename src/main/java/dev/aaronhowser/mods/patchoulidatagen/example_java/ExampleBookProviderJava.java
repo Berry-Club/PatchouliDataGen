@@ -1,6 +1,6 @@
 package dev.aaronhowser.mods.patchoulidatagen.example_java;
 
-import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement;
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement;
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider;
 import net.minecraft.data.DataGenerator;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,7 @@ public class ExampleBookProviderJava extends PatchouliBookProvider {
 	}
 
 	@Override
-	public void buildPages(@NotNull Consumer<@NotNull BookElement> consumer) {
+	public void buildPages(@NotNull Consumer<@NotNull PatchouliBookElement> consumer) {
 
 	}
 }

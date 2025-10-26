@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
 
-class BookCategory private constructor(
+class PatchouliPatchouliBookCategory private constructor(
 	private val name: String,
 	private val description: String,
 	private val icon: ItemLike,
@@ -16,8 +16,8 @@ class BookCategory private constructor(
 	private val secret: Boolean?,
 	private val parent: String?,
 	private val saveName: String,
-	private val book: Book
-) : BookElement {
+	private val patchouliBook: PatchouliPatchouliBook
+) : PatchouliBookElement {
 
 	override fun getSaveName(): String = this.saveName
 
@@ -37,7 +37,7 @@ class BookCategory private constructor(
 	}
 
 	fun getCategoryId(): ResourceLocation {
-		return ResourceLocation.fromNamespaceAndPath(book.getBookModId(), this.getSaveName())
+		return ResourceLocation.fromNamespaceAndPath(patchouliBook.getBookModId(), this.getSaveName())
 	}
 
 	companion object {
@@ -47,7 +47,7 @@ class BookCategory private constructor(
 
 	class Builder private constructor() {
 
-		private var book: Book? = null
+		private var patchouliBook: PatchouliPatchouliBook? = null
 		private var name: String? = null
 		private var description: String? = null
 		private var icon: ItemLike? = null
@@ -55,8 +55,8 @@ class BookCategory private constructor(
 		private var secret: Boolean? = null
 		private var parent: String? = null
 
-		fun book(book: Book): Builder {
-			this.book = book
+		fun book(patchouliBook: PatchouliPatchouliBook): Builder {
+			this.patchouliBook = patchouliBook
 			return this
 		}
 
@@ -69,7 +69,7 @@ class BookCategory private constructor(
 				error("Display properties have already been set!")
 			}
 
-			if (book?.isTranslatable().isNotTrue()) {
+			if (patchouliBook?.isTranslatable().isNotTrue()) {
 				error("Cannot use a Component name or description with a non-translatable Book")
 			}
 
@@ -114,38 +114,38 @@ class BookCategory private constructor(
 			return this
 		}
 
-		fun parent(bookCategory: BookCategory): Builder {
-			this.parent = bookCategory.getCategoryId().toString()
+		fun parent(patchouliBookCategory: PatchouliPatchouliBookCategory): Builder {
+			this.parent = patchouliBookCategory.getCategoryId().toString()
 			return this
 		}
 
-		fun save(consumer: Consumer<BookElement>, saveName: String): BookCategory {
+		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliPatchouliBookCategory {
 			val category = build(saveName)
 			consumer.accept(category)
 			return category
 		}
 
-		private fun build(saveName: String): BookCategory {
+		private fun build(saveName: String): PatchouliPatchouliBookCategory {
 			if (name == null || description == null || icon == null) {
 				error("Display properties have not been set!")
 			}
 
-			if (book == null) {
+			if (patchouliBook == null) {
 				error("Book has not been set!")
 			}
 
-			val bookCategory = BookCategory(
+			val patchouliBookCategory = PatchouliPatchouliBookCategory(
 				name = this.name!!,
 				description = this.description!!,
 				icon = this.icon!!,
 				sortNum = this.sortNum,
 				secret = this.secret,
 				saveName = saveName,
-				book = this.book!!,
+				patchouliBook = this.patchouliBook!!,
 				parent = this.parent
 			)
 
-			return bookCategory
+			return patchouliBookCategory
 		}
 
 		companion object {

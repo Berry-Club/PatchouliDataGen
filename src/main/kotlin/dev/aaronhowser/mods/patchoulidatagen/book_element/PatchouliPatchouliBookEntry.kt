@@ -8,9 +8,9 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
 
-class BookEntry private constructor(
+class PatchouliPatchouliBookEntry private constructor(
 	private val saveName: String,
-	private val category: BookCategory,
+	private val category: PatchouliPatchouliBookCategory,
 	private val name: String,
 	private val icon: ItemLike,
 	private val pages: Set<PageType>,
@@ -21,7 +21,7 @@ class BookEntry private constructor(
 	private val readByDefault: Boolean?,
 	private val sortNum: Int?,
 	private val turnIn: String?
-) : BookElement {
+) : PatchouliBookElement {
 
 	override fun getSaveName(): String = saveName
 
@@ -64,7 +64,7 @@ class BookEntry private constructor(
 	class Builder private constructor() {
 
 		private val pages: MutableSet<PageType> = mutableSetOf()
-		private var category: BookCategory? = null
+		private var category: PatchouliPatchouliBookCategory? = null
 		private var name: String? = null
 		private var icon: ItemLike? = null
 		private var advancement: String? = null
@@ -75,7 +75,7 @@ class BookEntry private constructor(
 		private var sortNum: Int? = null
 		private var turnIn: String? = null
 
-		fun category(category: BookCategory): Builder {
+		fun category(category: PatchouliPatchouliBookCategory): Builder {
 			this.category = category
 			return this
 		}
@@ -132,18 +132,18 @@ class BookEntry private constructor(
 			return this
 		}
 
-		fun save(consumer: Consumer<BookElement>, saveName: String): BookEntry {
+		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliPatchouliBookEntry {
 			val entry = build(saveName)
 			consumer.accept(entry)
 			return entry
 		}
 
-		fun build(saveName: String): BookEntry {
+		fun build(saveName: String): PatchouliPatchouliBookEntry {
 
 			require(category != null) { "BookEntry $saveName is missing category!" }
 			require(name != null && icon != null) { "BookEntry $saveName is missing display!" }
 
-			val entry = BookEntry(
+			val entry = PatchouliPatchouliBookEntry(
 				saveName,
 				category!!,
 				name!!,
