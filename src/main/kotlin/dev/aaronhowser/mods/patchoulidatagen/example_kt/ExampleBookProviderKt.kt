@@ -10,9 +10,12 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
+import net.minecraft.core.Direction
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Items
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.EndRodBlock
 import net.neoforged.neoforge.common.Tags
 import java.util.function.Consumer
 
@@ -67,14 +70,51 @@ class ExampleBookProviderKt(
 							.setSymmetrical()
 							.pattern(
 								arrayOf(
+									"     ",
+									"     ",
+									"  E  ",
+									"     ",
+									"     ",
+								),
+								arrayOf(
+									"     ",
+									"     ",
+									"  R  ",
+									"     ",
+									"     ",
+								),
+								arrayOf(
+									"     ",
+									"     ",
+									"     ",
+									"     ",
+									"     ",
+								),
+								arrayOf(
+									"     ",
+									"     ",
+									"     ",
+									"     ",
+									"     ",
+								),
+								arrayOf(
 									"BBBBB",
 									"B   B",
 									"B 0 B",
 									"B   B",
 									"BBBBB"
+								),
+								arrayOf(
+									"     ",
+									" EEE ",
+									" EEE ",
+									" EEE ",
+									"     ",
 								)
 							)
 							.map('B', Tags.Blocks.OBSIDIANS)
+							.map('E', Tags.Blocks.END_STONES)
+							.map('R', Blocks.END_ROD, EndRodBlock.FACING, Direction.DOWN)
 							.build()
 					)
 					.build()

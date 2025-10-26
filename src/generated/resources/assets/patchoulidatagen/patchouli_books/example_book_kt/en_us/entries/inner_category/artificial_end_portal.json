@@ -7,15 +7,52 @@
       "type": "patchouli:multiblock",
       "multiblock": {
         "mapping": {
-          "B": "#c:obsidians"
+          "B": "#c:obsidians",
+          "E": "#c:end_stones",
+          "R": "minecraft:end_rod[facing=down]"
         },
         "pattern": [
+          [
+            "     ",
+            "     ",
+            "  E  ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "  R  ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     "
+          ],
+          [
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     "
+          ],
           [
             "BBBBB",
             "B   B",
             "B 0 B",
             "B   B",
             "BBBBB"
+          ],
+          [
+            "     ",
+            " EEE ",
+            " EEE ",
+            " EEE ",
+            "     "
           ]
         ],
         "symmetrical": true

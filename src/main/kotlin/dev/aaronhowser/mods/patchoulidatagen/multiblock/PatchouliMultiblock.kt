@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.multiblock
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.Property
@@ -86,7 +87,8 @@ class PatchouliMultiblock(
 			require(char !in mappingCharacters) { "Character '$char' is already mapped to a block." }
 
 			mappingCharacters.add(char)
-			mappings[char] = block.name.string
+			val blockId = BuiltInRegistries.BLOCK.getKey(block)
+			mappings[char] = blockId.toString()
 
 			return this
 		}
@@ -97,11 +99,11 @@ class PatchouliMultiblock(
 			property: Property<T>,
 			value: T
 		): Builder {
-
 			require(char !in mappingCharacters) { "Character '$char' is already mapped to a block." }
 
 			mappingCharacters.add(char)
-			val blockStateString = "${block.name.string}[${property.name}=${property.getName(value)}]"
+			val blockId = BuiltInRegistries.BLOCK.getKey(block)
+			val blockStateString = "${blockId}[${property.name}=${property.getName(value)}]"
 			mappings[char] = blockStateString
 
 			return this
