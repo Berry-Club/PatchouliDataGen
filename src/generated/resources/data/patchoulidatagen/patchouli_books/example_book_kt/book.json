@@ -1,4 +1,5 @@
 {
+  "creative_tab": "spawn_eggs",
   "landing_text": "This book was generated using the Patchouli DataGen library in Kotlin.",
   "name": "Generated via Kotlin!"
 }
