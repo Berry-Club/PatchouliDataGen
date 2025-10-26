@@ -144,6 +144,12 @@ abstract class PatchouliBookProvider(
 
 		@JvmStatic
 		fun command(command: String, text: String): String = "$(c:/$command)$text$(/c)"
+
+		@JvmStatic
+		fun lines(vararg lines: String): String = lines.joinToString(BR)
+
+		@JvmStatic
+		fun doubleSpacedLines(vararg lines: String): String = lines.joinToString(BR2)
 	}
 
 }

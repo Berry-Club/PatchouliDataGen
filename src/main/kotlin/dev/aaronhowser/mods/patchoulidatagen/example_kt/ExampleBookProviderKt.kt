@@ -1,10 +1,10 @@
 package dev.aaronhowser.mods.patchoulidatagen.example_kt
 
 import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
@@ -49,20 +49,53 @@ class ExampleBookProviderKt(
 			.parent(categoryOne)
 			.save(consumer, "inner_category")
 
-		val textPage = TextPage.builder()
-			.title("Welcome to Kotlin DataGen")
-			.text("test")
-			.build()
-
-		val craftingPage = CraftingRecipePage.builder()
-			.mainRecipe(Items.STICK)
-			.text(Component.translatable("item.minecraft.stick"))
-			.build()
-
 		PatchouliBookEntry.builder()
 			.category(categoryOne)
-			.addPage(textPage)
-			.addPage(craftingPage)
+			.addPage(
+				TextPage.builder()
+					.title("Welcome to Kotlin DataGen")
+					.text(
+						lines(
+							"This is a line of text.",
+							"Here's another line of text.",
+							"${DARK_GREEN}DARK GREEN${RESET} text!"
+						)
+					)
+					.build()
+			)
+			.addPage(
+				TextPage.builder()
+					.title("More lines!!")
+					.text(
+						doubleSpacedLines(
+							"This is a line of text.",
+							"Here's another line of text.",
+							"And yet another line of text.${BR}You can also do it like this!"
+						)
+					)
+					.build()
+			)
+			.addPage(
+				TextPage.builder()
+					.text(
+						StringBuilder()
+							.append(
+								"${LI}${RED}list${LI}next line but still red because of no reset"
+							)
+							.append(BR)
+							.append("Not in the list any more but STILL RED!")
+							.append(BR)
+							.append("${RESET}Now it's good :)")
+							.toString()
+					)
+					.build()
+			)
+			.addPage(
+				CraftingRecipePage.builder()
+					.mainRecipe(Items.STICK)
+					.text(Component.translatable("item.minecraft.stick"))
+					.build()
+			)
 			.display("One!!!", Items.APPLE)
 			.save(consumer, "entry_one_kotlin")
 
