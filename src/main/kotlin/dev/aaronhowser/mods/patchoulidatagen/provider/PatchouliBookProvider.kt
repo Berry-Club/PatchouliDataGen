@@ -41,6 +41,8 @@ abstract class PatchouliBookProvider(
 		val bookLocations = mutableSetOf<String>()
 		val bookDefaultPath = "data/$modId/patchouli_books/$bookName/en_us"
 
+		val futures = mutableListOf<CompletableFuture<*>>()
+
 		val elementConsumer: Consumer<BookElement> = Consumer { element ->
 			val addedSuccessfully = bookLocations.add(element.getSaveName())
 
@@ -56,7 +58,7 @@ abstract class PatchouliBookProvider(
 						"$bookDefaultPath/entries/${element.getSaveName()}.json"
 					)
 
-					saveData(gson, output, element, entryFolder)
+					saveData(futures, gson, output, element, entryFolder)
 				}
 
 				is BookCategory -> {
@@ -65,7 +67,7 @@ abstract class PatchouliBookProvider(
 						"$bookDefaultPath/categories/${element.getSaveName()}.json"
 					)
 
-					saveData(gson, output, element, categoryFolder)
+					saveData(futures, gson, output, element, categoryFolder)
 				}
 
 				is BookHeader -> {
@@ -74,24 +76,26 @@ abstract class PatchouliBookProvider(
 						"data/$modId/patchouli_books/$bookName/${element.getSaveName()}.json"
 					)
 
-					saveData(gson, output, element, headerFolder)
+					saveData(futures, gson, output, element, headerFolder)
 				}
 			}
 
 		}
 
-		return CompletableFuture.runAsync {
-			buildPages(elementConsumer)
-		}
+		buildPages(elementConsumer)
+
+		return CompletableFuture.allOf(*futures.toTypedArray())
 	}
 
 	private fun <T : BookElement> saveData(
+		futures: MutableList<CompletableFuture<*>>,
 		gson: Gson,    // unused currently
 		cache: CachedOutput,
 		bookElement: T,
 		bookElementPath: Path
 	) {
-		DataProvider.saveStable(cache, bookElement.toJson(), bookElementPath)
+		val future = DataProvider.saveStable(cache, bookElement.toJson(), bookElementPath)
+		futures.add(future)
 	}
 
 	private fun resolvePath(path: PackOutput, pathOther: String): Path {

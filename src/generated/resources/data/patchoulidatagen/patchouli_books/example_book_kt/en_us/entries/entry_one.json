@@ -1,0 +1,16 @@
+{
+  "category": "patchoulidatagen.book.kt:category_one",
+  "icon": "minecraft:apple",
+  "name": "One!!!",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "This is a test\n\nof multiple lines",
+      "title": "Welcome to Kotlin DataGen"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "minecraft:stick"
+    }
+  ]
+}
