@@ -43,13 +43,7 @@ class ExampleBookProviderKt(
 
 		val textPage = TextPage.builder()
 			.title("Welcome to Kotlin DataGen")
-			.text(
-				"""
-				This is a test
-
-				of multiple lines
-			""".trimIndent()
-			)
+			.text("test")
 			.build()
 
 		val craftingPage = CraftingRecipePage.builder()

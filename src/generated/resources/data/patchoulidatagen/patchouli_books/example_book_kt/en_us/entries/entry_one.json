@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "This is a test\n\nof multiple lines",
+      "text": "test",
       "title": "Welcome to Kotlin DataGen"
     },
     {
