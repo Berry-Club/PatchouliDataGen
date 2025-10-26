@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
+import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.resources.ResourceLocation
 
@@ -10,6 +11,8 @@ import net.minecraft.resources.ResourceLocation
  * See [Page Types - Link Pages](https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/page-types/#link-pages)
  */
 class LinkPage(
+	private val text: String?,
+	private val title: String?,
 	private val url: String,
 	private val linkText: String,
 	advancement: ResourceLocation?,
@@ -23,6 +26,8 @@ class LinkPage(
 		super.addToJson(json)
 
 		json.apply {
+			addIfNotNull("text", text)
+			addIfNotNull("title", title)
 			addProperty("url", url)
 			addProperty("link_text", linkText)
 		}
@@ -36,6 +41,18 @@ class LinkPage(
 	class Builder private constructor() : AbstractPage.Builder<LinkPage, Builder>() {
 		private var url: String? = null
 		private var linkText: String? = null
+		private var text: String? = null
+		private var title: String? = null
+
+		fun text(text: String): Builder {
+			this.text = text
+			return this
+		}
+
+		fun title(title: String): Builder {
+			this.title = title
+			return this
+		}
 
 		fun button(
 			url: String,
@@ -51,6 +68,8 @@ class LinkPage(
 			requireNotNull(linkText) { "Link text must be set" }
 
 			return LinkPage(
+				text = text,
+				title = title,
 				url = url!!,
 				linkText = linkText!!,
 				advancement = advancement,
