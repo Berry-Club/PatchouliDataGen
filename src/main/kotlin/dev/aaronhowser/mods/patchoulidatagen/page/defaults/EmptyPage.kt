@@ -29,7 +29,7 @@ class EmptyPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<EmptyPage, Builder>() {
 		private var drawFiller: Boolean = false
 
 		fun drawFiller(drawFiller: Boolean): Builder {
@@ -37,7 +37,7 @@ class EmptyPage private constructor(
 			return this
 		}
 
-		fun build(): EmptyPage {
+		override fun build(): EmptyPage {
 			return EmptyPage(
 				drawFiller = drawFiller,
 				advancement = advancement,

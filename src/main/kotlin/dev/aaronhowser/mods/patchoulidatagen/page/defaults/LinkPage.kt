@@ -31,7 +31,7 @@ class LinkPage(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder, LinkPage>() {
+	class Builder private constructor() : AbstractPage.Builder<LinkPage, Builder>() {
 		private var url: String? = null
 		private var linkText: String? = null
 

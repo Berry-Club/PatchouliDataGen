@@ -35,7 +35,7 @@ class QuestPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>(){
+	class Builder private constructor() : AbstractPage.Builder<QuestPage, Builder>(){
 		private var trigger: String? = null
 		private var title: String? = null
 		private var text: String? = null
@@ -70,7 +70,7 @@ class QuestPage private constructor(
 			return this
 		}
 
-		fun build(): QuestPage {
+		override fun build(): QuestPage {
 			return QuestPage(
 				trigger = trigger,
 				title = title,

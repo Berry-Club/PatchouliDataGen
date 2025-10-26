@@ -41,7 +41,7 @@ class MultiblockPage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor(): AbstractPage.Builder<Builder>() {
+	class Builder private constructor(): AbstractPage.Builder<MultiblockPage, Builder>() {
 		private var multiBlockName: String? = null
 		private var multiblock: Multiblock? = null
 		private var multiblockId: String? = null
@@ -72,7 +72,7 @@ class MultiblockPage private constructor(
 			return this
 		}
 
-		fun build(): MultiblockPage {
+		override fun build(): MultiblockPage {
 			require(multiBlockName != null && multiblock != null) { "Multiblock name must be set" }
 
 			return MultiblockPage(

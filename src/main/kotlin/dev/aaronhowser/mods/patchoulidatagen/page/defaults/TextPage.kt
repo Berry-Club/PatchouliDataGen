@@ -28,7 +28,7 @@ class TextPage private constructor(
 		fun builder(): Builder = Builder.create()
 	}
 
-	class Builder : AbstractPage.Builder<TextPage.Builder>() {
+	class Builder : AbstractPage.Builder<TextPage, Builder>() {
 		private var text: String? = null
 		private var title: String? = null
 
@@ -52,7 +52,7 @@ class TextPage private constructor(
 			return this
 		}
 
-		fun build(): TextPage {
+		override fun build(): TextPage {
 			requireNotNull(text) { "TextPage text must be set!" }
 			return TextPage(
 				text = text!!,

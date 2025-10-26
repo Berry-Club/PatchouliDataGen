@@ -44,7 +44,7 @@ class ImagePage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<ImagePage, Builder>() {
 		private val images = mutableListOf<ResourceLocation>()
 		private var title: String? = null
 		private var border: String? = null
@@ -75,7 +75,7 @@ class ImagePage private constructor(
 			return this
 		}
 
-		fun build(): ImagePage {
+		override fun build(): ImagePage {
 			require(images.size in 1..2) { "There must be exactly 1 or 2 images" }
 
 			return ImagePage(

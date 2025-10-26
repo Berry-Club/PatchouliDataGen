@@ -44,7 +44,7 @@ class EntityPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<EntityPage, Builder>() {
 
 		private var entity: String? = null
 		private var scale: Float? = null
@@ -99,7 +99,7 @@ class EntityPage private constructor(
 			return this
 		}
 
-		fun build(): EntityPage {
+		override fun build(): EntityPage {
 			require(entity != null) { "Entity must be set" }
 			return EntityPage(
 				entity = entity!!,

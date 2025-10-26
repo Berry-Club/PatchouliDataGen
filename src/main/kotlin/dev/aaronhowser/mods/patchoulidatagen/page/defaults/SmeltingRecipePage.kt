@@ -35,7 +35,7 @@ class SmeltingRecipePage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>(){
+	class Builder private constructor() : AbstractPage.Builder<SmeltingRecipePage, Builder>(){
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
 		private var title: String? = null
@@ -83,7 +83,7 @@ class SmeltingRecipePage private constructor(
 			return this
 		}
 
-		fun build(): SmeltingRecipePage {
+		override fun build(): SmeltingRecipePage {
 			val recipeOne = requireNotNull(this.recipeOne) { "Main recipe must be set!" }
 
 			return SmeltingRecipePage(

@@ -41,7 +41,7 @@ class RelationsPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<RelationsPage, Builder>() {
 		private val entries: MutableList<String> = mutableListOf()
 		private var title: String? = null
 		private var text: String? = null
@@ -74,7 +74,7 @@ class RelationsPage private constructor(
 			return this
 		}
 
-		fun build(): RelationsPage {
+		override fun build(): RelationsPage {
 			require(entries.isNotEmpty()) { "At least one entry must be added to RelationsPage" }
 
 			return RelationsPage(

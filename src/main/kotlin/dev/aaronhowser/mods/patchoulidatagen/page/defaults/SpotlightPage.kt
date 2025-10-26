@@ -33,7 +33,7 @@ class SpotlightPage private constructor(
 		fun builder() = Builder.builder()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<Builder>() {
+	class Builder private constructor() : AbstractPage.Builder<SpotlightPage, Builder>() {
 		private var spotlightItem: ItemLike? = null
 		private var linkRecipe: Boolean? = null
 		private var title: String? = null
@@ -69,7 +69,7 @@ class SpotlightPage private constructor(
 			return this
 		}
 
-		fun build(): SpotlightPage {
+		override fun build(): SpotlightPage {
 			requireNotNull(spotlightItem) { "Spotlight item must be set" }
 
 			return SpotlightPage(
