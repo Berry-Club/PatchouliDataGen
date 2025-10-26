@@ -23,7 +23,7 @@ class PatchouliBookEntry private constructor(
 	private val turnIn: String?
 ) : PatchouliBookElement {
 
-	override fun getSaveName(): String = saveName
+	override fun getSaveName(): String = "${category.getSaveName()}/$saveName"
 
 	override fun toJson(): JsonObject {
 		val json = JsonObject()
