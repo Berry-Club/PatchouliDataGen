@@ -13,7 +13,6 @@ class BookHeader private constructor(
 	private val bookId: String,
 	private val name: String,
 	private val landingText: String,
-	private val saveName: String,
 	private val bookTexture: ResourceLocation?,
 	private val fillerTexture: String?,
 	private val craftingTexture: String?,
@@ -40,7 +39,7 @@ class BookHeader private constructor(
 	private val icon: ResourceLocation?
 ) : BookElement {
 
-	override fun getSaveName(): String = this.saveName
+	override fun getSaveName(): String = "book"
 
 	fun getBookId(): String = bookId
 	fun isTranslatable(): Boolean = i18n.isTrue()
@@ -261,11 +260,6 @@ class BookHeader private constructor(
 			return this
 		}
 
-		fun saveName(saveName: String): Builder {
-			this.saveName = saveName
-			return this
-		}
-
 		fun build(consumer: Consumer<BookElement>): BookHeader {
 			val finalName: String
 			val finalLandingText: String
@@ -286,7 +280,6 @@ class BookHeader private constructor(
 				bookId = this.bookId!!,
 				name = finalName,
 				landingText = finalLandingText,
-				saveName = this.saveName!!,
 				bookTexture = this.bookTexture,
 				fillerTexture = this.fillerTexture,
 				craftingTexture = this.craftingTexture,
