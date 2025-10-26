@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.patchoulidatagen.provider
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookCategory
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
-import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliPatchouliBook
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
@@ -44,7 +44,7 @@ abstract class PatchouliBookProvider(
 			}
 
 			when (element) {
-				is PatchouliPatchouliBookEntry -> {
+				is PatchouliBookEntry -> {
 					val entryFolder = resolvePath(
 						dataFolder,
 						"$bookDefaultPath/entries/${element.getSaveName()}.json"
@@ -53,7 +53,7 @@ abstract class PatchouliBookProvider(
 					saveData(futures, gson, output, element, entryFolder)
 				}
 
-				is PatchouliPatchouliBookCategory -> {
+				is PatchouliBookCategory -> {
 					val categoryFolder = resolvePath(
 						dataFolder,
 						"$bookDefaultPath/categories/${element.getSaveName()}.json"
@@ -62,7 +62,7 @@ abstract class PatchouliBookProvider(
 					saveData(futures, gson, output, element, categoryFolder)
 				}
 
-				is PatchouliPatchouliBook -> {
+				is PatchouliBook -> {
 					val headerFolder = resolvePath(
 						dataFolder,
 						"data/$modId/patchouli_books/$bookName/${element.getSaveName()}.json"

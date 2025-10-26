@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import java.util.function.Consumer
 
-class PatchouliPatchouliBook private constructor(
+class PatchouliBook private constructor(
 	private val bookModId: String,
 	private val name: String,
 	private val landingText: String,
@@ -260,13 +260,13 @@ class PatchouliPatchouliBook private constructor(
 			return this
 		}
 
-		fun save(consumer: Consumer<PatchouliBookElement>): PatchouliPatchouliBook {
+		fun save(consumer: Consumer<PatchouliBookElement>): PatchouliBook {
 			val header = build()
 			consumer.accept(header)
 			return header
 		}
 
-		fun build(): PatchouliPatchouliBook {
+		fun build(): PatchouliBook {
 			val finalName: String
 			val finalLandingText: String
 
@@ -282,7 +282,7 @@ class PatchouliPatchouliBook private constructor(
 
 			requireNotNull(this.bookModId) { "Book ID must be set!" }
 
-			val header = PatchouliPatchouliBook(
+			val header = PatchouliBook(
 				bookModId = this.bookModId!!,
 				name = finalName,
 				landingText = finalLandingText,

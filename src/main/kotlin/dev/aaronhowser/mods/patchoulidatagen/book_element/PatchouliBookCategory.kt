@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
 
-class PatchouliPatchouliBookCategory private constructor(
+class PatchouliBookCategory private constructor(
 	private val name: String,
 	private val description: String,
 	private val icon: ItemLike,
@@ -16,7 +16,7 @@ class PatchouliPatchouliBookCategory private constructor(
 	private val secret: Boolean?,
 	private val parent: String?,
 	private val saveName: String,
-	private val patchouliBook: PatchouliPatchouliBook
+	private val patchouliBook: PatchouliBook
 ) : PatchouliBookElement {
 
 	override fun getSaveName(): String = this.saveName
@@ -47,7 +47,7 @@ class PatchouliPatchouliBookCategory private constructor(
 
 	class Builder private constructor() {
 
-		private var patchouliBook: PatchouliPatchouliBook? = null
+		private var patchouliBook: PatchouliBook? = null
 		private var name: String? = null
 		private var description: String? = null
 		private var icon: ItemLike? = null
@@ -55,7 +55,7 @@ class PatchouliPatchouliBookCategory private constructor(
 		private var secret: Boolean? = null
 		private var parent: String? = null
 
-		fun book(patchouliBook: PatchouliPatchouliBook): Builder {
+		fun book(patchouliBook: PatchouliBook): Builder {
 			this.patchouliBook = patchouliBook
 			return this
 		}
@@ -114,18 +114,18 @@ class PatchouliPatchouliBookCategory private constructor(
 			return this
 		}
 
-		fun parent(patchouliBookCategory: PatchouliPatchouliBookCategory): Builder {
+		fun parent(patchouliBookCategory: PatchouliBookCategory): Builder {
 			this.parent = patchouliBookCategory.getCategoryId().toString()
 			return this
 		}
 
-		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliPatchouliBookCategory {
+		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliBookCategory {
 			val category = build(saveName)
 			consumer.accept(category)
 			return category
 		}
 
-		private fun build(saveName: String): PatchouliPatchouliBookCategory {
+		private fun build(saveName: String): PatchouliBookCategory {
 			if (name == null || description == null || icon == null) {
 				error("Display properties have not been set!")
 			}
@@ -134,7 +134,7 @@ class PatchouliPatchouliBookCategory private constructor(
 				error("Book has not been set!")
 			}
 
-			val patchouliBookCategory = PatchouliPatchouliBookCategory(
+			val patchouliBookCategory = PatchouliBookCategory(
 				name = this.name!!,
 				description = this.description!!,
 				icon = this.icon!!,

@@ -8,9 +8,9 @@ import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
 
-class PatchouliPatchouliBookEntry private constructor(
+class PatchouliBookEntry private constructor(
 	private val saveName: String,
-	private val category: PatchouliPatchouliBookCategory,
+	private val category: PatchouliBookCategory,
 	private val name: String,
 	private val icon: ItemLike,
 	private val pages: Set<PageType>,
@@ -64,7 +64,7 @@ class PatchouliPatchouliBookEntry private constructor(
 	class Builder private constructor() {
 
 		private val pages: MutableSet<PageType> = mutableSetOf()
-		private var category: PatchouliPatchouliBookCategory? = null
+		private var category: PatchouliBookCategory? = null
 		private var name: String? = null
 		private var icon: ItemLike? = null
 		private var advancement: String? = null
@@ -75,7 +75,7 @@ class PatchouliPatchouliBookEntry private constructor(
 		private var sortNum: Int? = null
 		private var turnIn: String? = null
 
-		fun category(category: PatchouliPatchouliBookCategory): Builder {
+		fun category(category: PatchouliBookCategory): Builder {
 			this.category = category
 			return this
 		}
@@ -132,18 +132,18 @@ class PatchouliPatchouliBookEntry private constructor(
 			return this
 		}
 
-		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliPatchouliBookEntry {
+		fun save(consumer: Consumer<PatchouliBookElement>, saveName: String): PatchouliBookEntry {
 			val entry = build(saveName)
 			consumer.accept(entry)
 			return entry
 		}
 
-		fun build(saveName: String): PatchouliPatchouliBookEntry {
+		fun build(saveName: String): PatchouliBookEntry {
 
 			require(category != null) { "BookEntry $saveName is missing category!" }
 			require(name != null && icon != null) { "BookEntry $saveName is missing display!" }
 
-			val entry = PatchouliPatchouliBookEntry(
+			val entry = PatchouliBookEntry(
 				saveName,
 				category!!,
 				name!!,
