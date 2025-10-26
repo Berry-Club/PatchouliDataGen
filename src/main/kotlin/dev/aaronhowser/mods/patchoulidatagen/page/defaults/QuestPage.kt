@@ -23,6 +23,8 @@ class QuestPage private constructor(
 	override fun getPageType(): String = "quest"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addIfNotNull("trigger", trigger)
 			addIfNotNull("title", title)

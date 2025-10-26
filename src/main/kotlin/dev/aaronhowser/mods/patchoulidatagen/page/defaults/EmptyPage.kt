@@ -19,6 +19,8 @@ class EmptyPage private constructor(
 	override fun getPageType(): String = "empty"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		if (drawFiller) {
 			json.addProperty("draw_filler", true)
 		}

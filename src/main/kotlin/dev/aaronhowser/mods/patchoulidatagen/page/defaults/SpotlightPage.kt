@@ -20,6 +20,8 @@ class SpotlightPage private constructor(
 	override fun getPageType(): String = "spotlight"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("item", spotlightItem.asItem().toString())
 			addIfNotNull("title", title)

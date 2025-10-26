@@ -28,6 +28,8 @@ class EntityPage private constructor(
 	override fun getPageType(): String = "entity"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("entity", entity)
 			addIfNotNull("scale", scale)

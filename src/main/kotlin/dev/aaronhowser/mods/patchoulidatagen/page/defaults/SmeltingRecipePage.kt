@@ -22,6 +22,8 @@ class SmeltingRecipePage private constructor(
 	override fun getPageType(): String = "smelting"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("recipe", recipeOne)
 			addIfNotNull("recipe2", recipeTwo)

@@ -26,6 +26,8 @@ class MultiblockPage private constructor(
 	override fun getPageType(): String = "multiblock"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("name", multiblockName)
 			add("multiblock", multiblock.toJson())

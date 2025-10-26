@@ -20,6 +20,8 @@ class LinkPage(
 	override fun getPageType(): String = "link"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("url", url)
 			addProperty("link_text", linkText)

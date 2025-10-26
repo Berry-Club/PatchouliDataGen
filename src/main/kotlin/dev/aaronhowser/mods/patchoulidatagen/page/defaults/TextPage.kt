@@ -17,6 +17,8 @@ class TextPage private constructor(
 	override fun getPageType(): String = "text"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("text", text)
 			addIfNotNull("title", title)

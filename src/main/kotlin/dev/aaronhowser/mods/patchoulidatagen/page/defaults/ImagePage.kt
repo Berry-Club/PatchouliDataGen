@@ -25,6 +25,8 @@ class ImagePage private constructor(
 	override fun getPageType(): String = "image"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 
 			val imageArray = JsonArray()
