@@ -1,0 +1,26 @@
+{
+  "category": "patchoulidatagen:inner_category",
+  "icon": "minecraft:end_portal_frame",
+  "name": "Artificial End Portal",
+  "pages": [
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "B": "#c:obsidians"
+        },
+        "pattern": [
+          [
+            "BBBBB",
+            "B   B",
+            "B 0 B",
+            "B   B",
+            "BBBBB"
+          ]
+        ],
+        "symmetrical": true
+      },
+      "name": "Artificial End Portal"
+    }
+  ]
+}

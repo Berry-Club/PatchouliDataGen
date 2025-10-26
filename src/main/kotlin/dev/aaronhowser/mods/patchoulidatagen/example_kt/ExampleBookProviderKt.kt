@@ -5,12 +5,15 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
+import dev.aaronhowser.mods.patchoulidatagen.multiblock.PatchouliMultiblock
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Items
+import net.neoforged.neoforge.common.Tags
 import java.util.function.Consumer
 
 class ExampleBookProviderKt(
@@ -48,6 +51,35 @@ class ExampleBookProviderKt(
 			)
 			.parent(categoryOne)
 			.save(consumer, "inner_category")
+
+		PatchouliBookEntry.builder()
+			.category(innerCategory)
+			.display(
+				entryName = "Artificial End Portal",
+				icon = Items.END_PORTAL_FRAME
+			)
+			.addPage(
+				MultiblockPage.builder()
+					.name("Artificial End Portal")
+					.multiblock(
+						"Artificial End Portal",
+						PatchouliMultiblock.builder()
+							.setSymmetrical()
+							.pattern(
+								arrayOf(
+									"BBBBB",
+									"B   B",
+									"B 0 B",
+									"B   B",
+									"BBBBB"
+								)
+							)
+							.map('B', Tags.Blocks.OBSIDIANS)
+							.build()
+					)
+					.build()
+			)
+			.save(consumer, "artificial_end_portal")
 
 		PatchouliBookEntry.builder()
 			.category(categoryOne)

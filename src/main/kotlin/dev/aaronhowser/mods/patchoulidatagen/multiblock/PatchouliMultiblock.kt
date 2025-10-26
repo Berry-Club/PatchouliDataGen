@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.Property
 
 class PatchouliMultiblock(
-	private val multiblock: List<List<String>>,
+	private val pattern: Array<Array<String>>,
 	private val mappings: Map<Char, String>,
 	private val symmetrical: Boolean?,
 	private val offset: Array<Int>?
@@ -28,7 +28,7 @@ class PatchouliMultiblock(
 
 		val allLayersArray = JsonArray()
 
-		for (layer in multiblock) {
+		for (layer in pattern) {
 			val layerArray = JsonArray()
 
 			for (row in layer) {
@@ -38,7 +38,7 @@ class PatchouliMultiblock(
 			allLayersArray.add(layerArray)
 		}
 
-		json.add("layers", allLayersArray)
+		json.add("pattern", allLayersArray)
 
 		json.addIfNotNull("symmetrical", symmetrical)
 
@@ -62,7 +62,7 @@ class PatchouliMultiblock(
 
 		private val mappingCharacters: MutableSet<Char> = mutableSetOf()
 		private val mappings: MutableMap<Char, String> = mutableMapOf()
-		private val multiblock: MutableList<List<String>> = mutableListOf()
+		private val multiblock: ArrayList<Array<String>> = arrayListOf()
 
 		private var symmetrical: Boolean? = null
 		private var offset: Array<Int>? = null
@@ -77,9 +77,8 @@ class PatchouliMultiblock(
 			return this
 		}
 
-		fun pattern(vararg layerPattern: String): Builder {
-			val layerMultiblock = layerPattern.toList()
-			multiblock.add(layerMultiblock)
+		fun pattern(vararg layerPattern: Array<String>): Builder {
+			multiblock.addAll(layerPattern)
 			return this
 		}
 
@@ -121,14 +120,18 @@ class PatchouliMultiblock(
 			require(mappingCharacters.isNotEmpty()) { "At least one mapping must be defined." }
 			require(multiblock.isNotEmpty()) { "At least one layer must be defined." }
 
-			val amountZeroes = multiblock.flatten().sumOf { layer -> layer.count { it == '0' } }
+			val amountZeroes = multiblock.sumOf { layer ->
+				layer.sumOf { row ->
+					row.count { char -> char == '0' }
+				}
+			}
 
 			require(amountZeroes == 1) {
 				"Exactly one '0' character must be present to represent the center. See https://vazkiimods.github.io/Patchouli/docs/patchouli-basics/multiblocks#the-pattern"
 			}
 
 			return PatchouliMultiblock(
-				multiblock = multiblock,
+				pattern = multiblock.toTypedArray(),
 				mappings = mappings,
 				symmetrical = symmetrical,
 				offset = offset
