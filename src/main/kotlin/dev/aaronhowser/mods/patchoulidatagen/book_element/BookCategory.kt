@@ -9,7 +9,7 @@ import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
 
 class BookCategory private constructor(
-	private val title: String,
+	private val name: String,
 	private val description: String,
 	private val icon: ItemLike,
 	private val sortNum: Int?,
@@ -24,7 +24,7 @@ class BookCategory private constructor(
 		val json = JsonObject()
 
 		json.apply {
-			addProperty("title", title)
+			addProperty("name", name)
 			addProperty("description", description)
 			addProperty("icon", icon.asItem().toString()) //TODO: Is this correct?
 			addIfNotNull("sort_num", sortNum)
@@ -46,7 +46,7 @@ class BookCategory private constructor(
 	class Builder private constructor() {
 
 		private var bookHeader: BookHeader? = null
-		private var title: String? = null
+		private var name: String? = null
 		private var description: String? = null
 		private var icon: ItemLike? = null
 		private var sortNum: Int? = null
@@ -58,34 +58,34 @@ class BookCategory private constructor(
 		}
 
 		fun setDisplay(
-			title: Component,
+			name: Component,
 			description: Component,
 			icon: ItemLike
 		): Builder {
-			if (this.title != null || this.description != null || this.icon != null) {
+			if (this.name != null || this.description != null || this.icon != null) {
 				error("Display properties have already been set!")
 			}
 
 			if (bookHeader?.isTranslatable().isNotTrue()) {
-				error("Cannot use a Component title or description with a non-translatable BookHeader")
+				error("Cannot use a Component name or description with a non-translatable BookHeader")
 			}
 
-			this.title = title.string
+			this.name = name.string
 			this.description = description.string
 			this.icon = icon
 			return this
 		}
 
 		fun setDisplay(
-			title: String,
+			name: String,
 			description: String,
 			icon: ItemLike
 		): Builder {
-			if (this.title != null || this.description != null || this.icon != null) {
+			if (this.name != null || this.description != null || this.icon != null) {
 				error("Display properties have already been set!")
 			}
 
-			this.title = title
+			this.name = name
 			this.description = description
 			this.icon = icon
 			return this
@@ -113,7 +113,7 @@ class BookCategory private constructor(
 		}
 
 		private fun build(saveName: String): BookCategory {
-			if (title == null || description == null || icon == null) {
+			if (name == null || description == null || icon == null) {
 				error("Display properties have not been set!")
 			}
 
@@ -122,7 +122,7 @@ class BookCategory private constructor(
 			}
 
 			val bookCategory = BookCategory(
-				title = this.title!!,
+				name = this.name!!,
 				description = this.description!!,
 				icon = this.icon!!,
 				sortNum = this.sortNum,

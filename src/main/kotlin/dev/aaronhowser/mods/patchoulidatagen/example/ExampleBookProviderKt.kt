@@ -35,7 +35,7 @@ class ExampleBookProviderKt(
 		val categoryOne = BookCategory.builder()
 			.header(header)
 			.setDisplay(
-				title = "Category One",
+				name = "Category One",
 				description = "This is the first category in the Kotlin-generated book.",
 				icon = Items.DIRT
 			)
