@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.patchoulidatagen.example
+package dev.aaronhowser.mods.patchoulidatagen.example_kt
 
 import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
 import net.neoforged.bus.api.SubscribeEvent

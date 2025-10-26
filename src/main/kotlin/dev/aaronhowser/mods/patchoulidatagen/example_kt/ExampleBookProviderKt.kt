@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.patchoulidatagen.example
+package dev.aaronhowser.mods.patchoulidatagen.example_kt
 
 import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
@@ -12,7 +12,6 @@ import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.item.Items
-import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.function.Consumer
 
 class ExampleBookProviderKt(
