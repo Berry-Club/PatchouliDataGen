@@ -42,7 +42,7 @@ class BookEntry private constructor(
 
 				pagesArray.add(pageJson)
 			}
-			add("advancement", pagesArray)
+			add("pages", pagesArray)
 
 			addIfNotNull("advancement", advancement)
 			addIfNotNull("config_flag", configFlag)
@@ -132,7 +132,11 @@ class BookEntry private constructor(
 			return this
 		}
 
-		fun build(consumer: Consumer<BookElement>, saveName: String): BookEntry {
+		fun save(consumer: Consumer<BookElement>, saveName: String): BookEntry {
+			return build(consumer, saveName)
+		}
+
+		private fun build(consumer: Consumer<BookElement>, saveName: String): BookEntry {
 
 			require(category != null) { "BookEntry $saveName is missing category!" }
 			require(name != null && icon != null) { "BookEntry $saveName is missing display!" }

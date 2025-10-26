@@ -96,7 +96,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 				.addPage(multiblockPage1)
 				.addPage(smeltingPage)
 				.addPage(spotlightPage)
-				.build(consumer, "test_entry_category_one");
+				.save(consumer, "test_entry_category_one");
 
 		BookEntry.builder()
 				.category(category2)
@@ -106,7 +106,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 				.addPage(multiblockPage)
 				.addPage(entityPage)
 				.addPage(crafting)
-				.build(consumer, "test_entry_category_2");
+				.save(consumer, "test_entry_category_2");
 	}
 
 	private Component translate(String key) {

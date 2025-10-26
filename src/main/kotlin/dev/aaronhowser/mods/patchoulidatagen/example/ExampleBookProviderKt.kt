@@ -60,7 +60,7 @@ class ExampleBookProviderKt(
 			.addPage(textPage)
 			.addPage(craftingPage)
 			.display("One!!!", Items.APPLE)
-			.build(consumer, "entry_one")
+			.save(consumer, "entry_one")
 
 	}
 
