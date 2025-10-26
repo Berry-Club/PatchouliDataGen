@@ -36,7 +36,7 @@ public class PatchouliGeneratorImpl extends PatchouliBookProvider {
 						modid, translate("test_book.name"),
 						translate("test_book.landing_text")
 				)
-				.build(consumer);
+				.save(consumer);
 
 		BookCategory category1 = BookCategory.builder()
 				.header(header)
