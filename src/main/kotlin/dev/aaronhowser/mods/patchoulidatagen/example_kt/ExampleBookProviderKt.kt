@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.BookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.BookEntry
 import dev.aaronhowser.mods.patchoulidatagen.book_element.Book
+import dev.aaronhowser.mods.patchoulidatagen.book_element.dsl.BookDsl
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
@@ -22,17 +23,20 @@ class ExampleBookProviderKt(
 
 	override fun buildPages(consumer: Consumer<BookElement>) {
 
-		val header = Book.builder()
-			.setBookText(
+		val book = BookDsl.createBook(consumer) {
+			book(
 				bookModId = PatchouliDataGen.MOD_ID,
 				name = "Generated via Kotlin!",
 				landingText = "This book was generated using the Patchouli DataGen library in Kotlin."
 			)
-			.creativeTab("minecraft:tools_and_utilities")
-			.save(consumer)
+
+			misc {
+				creativeTab("minecraft:tools_and_utilities")
+			}
+		}
 
 		val categoryOne = BookCategory.builder()
-			.header(header)
+			.header(book)
 			.setDisplay(
 				name = "Category One",
 				description = "This is the first category in the Kotlin-generated book.",
@@ -41,7 +45,7 @@ class ExampleBookProviderKt(
 			.save(consumer, "category_one")
 
 		val innerCategory = BookCategory.builder()
-			.header(header)
+			.header(book)
 			.setDisplay(
 				name = "Inner Category",
 				description = "This is a sub-category inside Category One.",
