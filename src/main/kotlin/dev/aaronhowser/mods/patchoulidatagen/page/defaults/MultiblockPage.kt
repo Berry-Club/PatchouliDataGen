@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation
  */
 class MultiblockPage private constructor(
 	private val multiblockName: String,
-	private val multiblock: Multiblock,
+	private val multiblock: Multiblock?,
 	private val multiblockId: String?,
 	private val enableVisualize: Boolean?,
 	private val text: Component?,
@@ -30,8 +30,8 @@ class MultiblockPage private constructor(
 
 		json.apply {
 			addProperty("name", multiblockName)
-			add("multiblock", multiblock.toJson())
 
+			addIfNotNull("multiblock", multiblock?.toJson())
 			addIfNotNull("multiblock_id", multiblockId)
 			addIfNotNull("enable_visualize", enableVisualize)
 			addIfNotNull("text", text)

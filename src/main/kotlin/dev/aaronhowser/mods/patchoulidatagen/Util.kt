@@ -55,4 +55,11 @@ object Util {
 		}
 	}
 
+	@JvmStatic
+	fun JsonObject.addIfNotNull(key: String, value: JsonObject?) {
+		if (value != null) {
+			this.add(key, value)
+		}
+	}
+
 }
