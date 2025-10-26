@@ -29,38 +29,39 @@ class ExampleBookProviderKt(
 				name = "Generated via Kotlin!",
 				landingText = "This book was generated using the Patchouli DataGen library in Kotlin."
 			)
+			.saveName("adsada")
 			.build(consumer)
 
-		val categoryOne = BookCategory.builder()
-			.header(header)
-			.setDisplay(
-				title = "Category One",
-				description = "This is the first category in the Kotlin-generated book.",
-				icon = Items.DIRT
-			)
-			.save(consumer, "category_one")
-
-		val textPage = TextPage.builder()
-			.title("Welcome to Kotlin DataGen")
-			.text(
-				"""
-				This is a test
-				
-				of multiple lines
-			""".trimIndent()
-			)
-			.build()
-
-		val craftingPage = CraftingRecipePage.builder()
-			.mainRecipe(Items.STICK)
-			.build()
-
-		BookEntry.builder()
-			.category(categoryOne)
-			.display("One!!!", Items.APPLE)
-			.addPage(textPage)
-			.addPage(craftingPage)
-			.build(consumer, "category_one")
+//		val categoryOne = BookCategory.builder()
+//			.header(header)
+//			.setDisplay(
+//				title = "Category One",
+//				description = "This is the first category in the Kotlin-generated book.",
+//				icon = Items.DIRT
+//			)
+//			.save(consumer, "category_one")
+//
+//		val textPage = TextPage.builder()
+//			.title("Welcome to Kotlin DataGen")
+//			.text(
+//				"""
+//				This is a test
+//
+//				of multiple lines
+//			""".trimIndent()
+//			)
+//			.build()
+//
+//		val craftingPage = CraftingRecipePage.builder()
+//			.mainRecipe(Items.STICK)
+//			.build()
+//
+//		BookEntry.builder()
+//			.category(categoryOne)
+//			.display("One!!!", Items.APPLE)
+//			.addPage(textPage)
+//			.addPage(craftingPage)
+//			.build(consumer, "category_one")
 
 	}
 
