@@ -2,10 +2,10 @@ package dev.aaronhowser.mods.patchoulidatagen.provider
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
-import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
@@ -95,5 +95,55 @@ abstract class PatchouliBookProvider(
 	}
 
 	abstract fun buildPages(consumer: Consumer<PatchouliBookElement>)
+
+	companion object {
+		const val RESET = "$()"
+		const val BR = "$(br)"
+		const val BR2 = "$(br2)"
+		const val LI = "$(li)"
+		const val LI2 = "$(li2)"
+		const val LI3 = "$(li3)"
+
+		const val BLACK = "$(0)"
+		const val DARK_BLUE = "$(1)"
+		const val DARK_GREEN = "$(2)"
+		const val DARK_AQUA = "$(3)"
+		const val DARK_RED = "$(4)"
+		const val DARK_PURPLE = "$(5)"
+		const val GOLD = "$(6)"
+		const val GRAY = "$(7)"
+		const val DARK_GRAY = "$(8)"
+		const val BLUE = "$(9)"
+		const val GREEN = "$(a)"
+		const val AQUA = "$(b)"
+		const val RED = "$(c)"
+		const val LIGHT_PURPLE = "$(d)"
+		const val YELLOW = "$(e)"
+		const val WHITE = "$(f)"
+
+		const val OBFUSCATED = "$(k)"
+		const val BOLD = "$(l)"
+		const val STRIKETHROUGH = "$(m)"
+		const val UNDERLINE = "$(n)"
+		const val ITALIC = "$(o)"
+
+		@JvmStatic
+		fun internalLink(
+			linkTo: String,
+			text: String
+		): String = "$(l:$linkTo)$text$(/l)"
+
+		@JvmStatic
+		fun internalLink(linkTo: String, anchor: String, text: String): String = "$(l:$linkTo#$anchor)$text$(/l)"
+
+		@JvmStatic
+		fun keybind(keybind: String): String = "$(k:$keybind)"
+
+		@JvmStatic
+		fun tooltip(tooltip: String, text: String): String = "$(t:$tooltip)$text$(/t)"
+
+		@JvmStatic
+		fun command(command: String, text: String): String = "$(c:/$command)$text$(/c)"
+	}
 
 }
