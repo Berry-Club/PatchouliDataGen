@@ -42,6 +42,16 @@ class ExampleBookProviderKt(
 			)
 			.save(consumer, "category_one")
 
+		val innerCategory = BookCategory.builder()
+			.header(header)
+			.setDisplay(
+				name = "Inner Category",
+				description = "This is a sub-category inside Category One.",
+				icon = Items.COBBLESTONE
+			)
+			.parent(categoryOne)
+			.save(consumer, "inner_category")
+
 		val textPage = TextPage.builder()
 			.title("Welcome to Kotlin DataGen")
 			.text("test")

@@ -1,0 +1,6 @@
+{
+  "parent": "patchoulidatagen:category_one",
+  "description": "This is a sub-category inside Category One.",
+  "icon": "minecraft:cobblestone",
+  "name": "Inner Category"
+}
