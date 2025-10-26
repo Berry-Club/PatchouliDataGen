@@ -14,6 +14,7 @@ class BookCategory private constructor(
 	private val icon: ItemLike,
 	private val sortNum: Int?,
 	private val secret: Boolean?,
+	private val parent: String?,
 	private val saveName: String,
 	private val header: BookHeader
 ) : BookElement {
@@ -29,6 +30,7 @@ class BookCategory private constructor(
 			addProperty("icon", icon.asItem().toString()) //TODO: Is this correct?
 			addIfNotNull("sort_num", sortNum)
 			addIfNotNull("secret", secret)
+			addIfNotNull("parent", parent)
 		}
 
 		return json
@@ -51,6 +53,7 @@ class BookCategory private constructor(
 		private var icon: ItemLike? = null
 		private var sortNum: Int? = null
 		private var secret: Boolean? = null
+		private var parent: String? = null
 
 		fun header(header: BookHeader): Builder {
 			this.bookHeader = header
@@ -106,6 +109,16 @@ class BookCategory private constructor(
 			return this
 		}
 
+		fun parent(parent: String): Builder {
+			this.parent = parent
+			return this
+		}
+
+		fun parent(bookCategory: BookCategory): Builder {
+			this.parent = bookCategory.getCategoryId().toString()
+			return this
+		}
+
 		fun save(consumer: Consumer<BookElement>, saveName: String): BookCategory {
 			val category = build(saveName)
 			consumer.accept(category)
@@ -128,7 +141,8 @@ class BookCategory private constructor(
 				sortNum = this.sortNum,
 				secret = this.secret,
 				saveName = saveName,
-				header = this.bookHeader!!
+				header = this.bookHeader!!,
+				parent = this.parent
 			)
 
 			return bookCategory
