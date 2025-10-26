@@ -54,6 +54,18 @@ class TextPage private constructor(
 			return this
 		}
 
+		fun text(title: String, text: String): Builder {
+			this.title = title
+			this.text = text
+			return this
+		}
+
+		fun text(title: Component, text: Component): Builder {
+			this.title = title.string
+			this.text = text.string
+			return this
+		}
+
 		override fun build(): TextPage {
 			requireNotNull(text) { "TextPage text must be set!" }
 			return TextPage(
