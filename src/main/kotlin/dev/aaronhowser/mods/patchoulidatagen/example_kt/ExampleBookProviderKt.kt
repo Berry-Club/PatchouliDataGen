@@ -10,7 +10,6 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.MutableComponent
 import net.minecraft.world.item.Items
 import java.util.function.Consumer
 
@@ -69,5 +68,4 @@ class ExampleBookProviderKt(
 
 	}
 
-	fun translate(key: String): MutableComponent = Component.translatable(key)
 }
