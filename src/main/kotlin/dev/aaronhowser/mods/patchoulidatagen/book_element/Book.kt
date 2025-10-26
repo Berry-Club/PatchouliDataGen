@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import java.util.function.Consumer
 
-class Book(
+class Book private constructor(
 	private val bookModId: String,
 	private val name: String,
 	private val landingText: String,
