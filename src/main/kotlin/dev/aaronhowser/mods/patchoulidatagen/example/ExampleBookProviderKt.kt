@@ -17,10 +17,9 @@ import java.util.function.Consumer
 
 class ExampleBookProviderKt(
 	generator: DataGenerator,
-	existingFileHelper: ExistingFileHelper?,
 	bookName: String,
 	modId: String
-) : PatchouliBookProvider(generator, existingFileHelper, bookName, modId) {
+) : PatchouliBookProvider(generator, bookName, modId) {
 
 	override fun buildPages(consumer: Consumer<BookElement>) {
 

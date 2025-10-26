@@ -18,18 +18,11 @@ import java.util.function.Consumer
 
 abstract class PatchouliBookProvider(
 	protected val generator: DataGenerator,
-	protected val existingFileHelper: ExistingFileHelper?,
 	protected val bookName: String,
 	protected val modId: String
 ) : DataProvider {
 
 	protected val gson: Gson = GsonBuilder().setPrettyPrinting().create()
-
-	constructor(
-		generator: DataGenerator,
-		bookName: String,
-		modId: String
-	) : this(generator, null, bookName, modId)
 
 	override fun getName(): String {
 		return "Patchouli Book: $bookName"
