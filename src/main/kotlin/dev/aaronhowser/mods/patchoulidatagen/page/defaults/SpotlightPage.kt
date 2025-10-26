@@ -50,6 +50,25 @@ class SpotlightPage private constructor(
 				.text(text)
 				.build()
 		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItem: ItemLike, title: String, text: String): SpotlightPage {
+			return builder()
+				.item(spotlightItem)
+				.title(title)
+				.text(text)
+				.linkRecipe(true)
+				.build()
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItem: ItemLike, text: String): SpotlightPage {
+			return builder()
+				.item(spotlightItem)
+				.text(text)
+				.linkRecipe(true)
+				.build()
+		}
 	}
 
 	class Builder private constructor() : AbstractPage.Builder<SpotlightPage, Builder>() {
