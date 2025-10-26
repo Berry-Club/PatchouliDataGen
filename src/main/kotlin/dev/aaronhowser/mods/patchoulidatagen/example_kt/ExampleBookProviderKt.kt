@@ -33,7 +33,7 @@ class ExampleBookProviderKt(
 		val categoryOne = PatchouliBookCategory.builder()
 			.book(book)
 			.setDisplay(
-				name = "Category One Java",
+				name = "Category One Kotlin",
 				description = "This is the first category in the Kotlin-generated book.",
 				icon = Items.DIRT
 			)
