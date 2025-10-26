@@ -44,7 +44,7 @@ abstract class PatchouliBookProvider(
 		val elementConsumer: Consumer<BookElement> = Consumer { element ->
 			val addedSuccessfully = bookLocations.add(element.getSaveName())
 
-			if (addedSuccessfully) {
+			if (!addedSuccessfully) {
 				val rl = ResourceLocation.fromNamespaceAndPath(modId, element.getSaveName())
 				error("Duplicate book element [$rl]")
 			}
