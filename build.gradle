@@ -100,10 +100,15 @@ repositories {
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
     }
 
+    maven { url 'https://maven.blamejared.com' }
+
 }
 
 dependencies {
     implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
+
+    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
+    runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {
