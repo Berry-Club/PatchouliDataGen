@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.Util.addProperty
-import dev.aaronhowser.mods.patchoulidatagen.page.PageType
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.ItemLike
@@ -17,12 +17,17 @@ class CraftingRecipePage private constructor(
 	private val recipeOne: ResourceLocation,
 	private val recipeTwo: ResourceLocation?,
 	private val title: String?,
-	private val text: String?
-) : PageType {
+	private val text: String?,
+	advancement: ResourceLocation?,
+	flag: String?,
+	anchor: String?
+) : AbstractPage(advancement, flag, anchor) {
 
 	override fun getPageType(): String = "crafting"
 
 	override fun addToJson(json: JsonObject) {
+		super.addToJson(json)
+
 		json.apply {
 			addProperty("recipe", recipeOne)
 			addIfNotNull("recipe2", recipeTwo)
@@ -36,7 +41,7 @@ class CraftingRecipePage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() {
+	class Builder private constructor() : AbstractPage.Builder() {
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
 		private var title: String? = null
@@ -96,7 +101,10 @@ class CraftingRecipePage private constructor(
 				recipeOne = recipeOne!!,
 				recipeTwo = recipeTwo,
 				title = title,
-				text = text
+				text = text,
+				advancement = advancement,
+				flag = flag,
+				anchor = anchor
 			)
 		}
 

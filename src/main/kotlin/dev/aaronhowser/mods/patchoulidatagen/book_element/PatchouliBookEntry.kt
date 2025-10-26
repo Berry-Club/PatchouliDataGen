@@ -3,7 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
-import dev.aaronhowser.mods.patchoulidatagen.page.PageType
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike
 import java.util.function.Consumer
@@ -13,7 +13,7 @@ class PatchouliBookEntry private constructor(
 	private val category: PatchouliBookCategory,
 	private val name: String,
 	private val icon: ItemLike,
-	private val pages: Set<PageType>,
+	private val pages: Set<AbstractPage>,
 	private val advancement: String?,
 	private val configFlag: String?,
 	private val priority: Boolean?,
@@ -63,7 +63,7 @@ class PatchouliBookEntry private constructor(
 
 	class Builder private constructor() {
 
-		private val pages: MutableSet<PageType> = mutableSetOf()
+		private val pages: MutableSet<AbstractPage> = mutableSetOf()
 		private var category: PatchouliBookCategory? = null
 		private var name: String? = null
 		private var icon: ItemLike? = null
@@ -127,7 +127,7 @@ class PatchouliBookEntry private constructor(
 			return this
 		}
 
-		fun addPage(page: PageType): Builder {
+		fun addPage(page: AbstractPage): Builder {
 			this.pages.add(page)
 			return this
 		}

@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
-import dev.aaronhowser.mods.patchoulidatagen.page.PageType
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 
