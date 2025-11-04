@@ -10,11 +10,6 @@
     },
     {
       "type": "patchouli:text",
-      "text": "This is a line of text.$(br2)Here's another line of text.$(br2)And yet another line of text.$(br)You can also do it like this!",
-      "title": "More lines!!"
-    },
-    {
-      "type": "patchouli:text",
       "text": "$(li)$(c)list$(li)next line but still red because of no reset$(br)Not in the list any more but STILL RED!$(br)$()Now it's good :)$(br)$(6)This is gold text using the Color enum!$()"
     },
     {

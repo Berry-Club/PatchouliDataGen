@@ -45,8 +45,13 @@ class SpotlightPage private constructor(
 					sb.append(itemStack.item.toString())
 
 					if (itemStack.count != 1) {
-						sb.append("#").append(itemStack.count)
+						sb.append("tag:").append(itemStack.count)
 					}
+
+//					val components = itemStack.componentsPatch
+//					if (!components.isEmpty) {
+//						sb.append(components.toString())
+//					}
 				}
 
 				is TripleEither.Third -> {

@@ -13,7 +13,6 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
-import net.minecraft.core.component.DataComponents
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
@@ -128,6 +127,27 @@ class ExampleBookProviderKt(
 		PatchouliBookEntry.builder()
 			.category(categoryOne)
 			.addPage(
+				SpotlightPage.builder()
+					.addItemTag(ItemTags.DIRT)
+					.addItemLike(Items.DIAMOND_SHOVEL)
+//					.addItemStack(
+//						Items.GOLDEN_HOE
+//							.defaultInstance
+//							.apply {
+//								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
+//								set(DataComponents.MAX_STACK_SIZE, 12321)
+//								count = 4
+//							}
+//					)
+					.text("Test")
+					.build()
+			)
+			.display("Test", Items.DIAMOND)
+			.save(consumer, "multiple_items_test")
+
+		PatchouliBookEntry.builder()
+			.category(categoryOne)
+			.addPage(
 				TextPage.builder()
 					.title("Welcome to Kotlin DataGen")
 					.text(
@@ -136,21 +156,6 @@ class ExampleBookProviderKt(
 							"Here's another line of text.",
 							"${TextColor.DARK_GREEN}DARK GREEN${RESET} text!"
 						)
-					)
-					.build()
-			)
-			.addPage(
-				SpotlightPage.builder()
-					.addItemTag(ItemTags.DIRT)
-					.addItemLike(Items.DIAMOND_SHOVEL)
-					.addItemStack(
-						Items.GOLDEN_HOE
-							.defaultInstance
-							.apply {
-								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
-								set(DataComponents.MAX_STACK_SIZE, 12321)
-								count = 4
-							}
 					)
 					.build()
 			)

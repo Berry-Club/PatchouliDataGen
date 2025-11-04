@@ -1,6 +1,7 @@
-// 1.21.1	2025-10-26T01:34:35.2914617	Patchouli Book: example_book_kt
+// 1.21.1	2025-11-04T16:48:08.4416479	Patchouli Book: example_book_kt
 8d4745c16db1264d907c292634bd3dbc52345793 assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/categories/category_one.json
 1e7501b688825724673288a0ab68554b8649a5de assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/categories/inner_category.json
-936419172ac4c3d8d10fd70238537416f7f228dc assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/entries/category_one/entry_one_kotlin.json
+9a536e2e5549becf37cb18138cf3221b43987a7b assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/entries/category_one/entry_one_kotlin.json
+bdb328e686ccac9324ec1d21655ffd0082da3891 assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/entries/category_one/multiple_items_test.json
 6ec6061a640815fe68b5958faecef4ddf7106cc9 assets/patchoulidatagen/patchouli_books/example_book_kt/en_us/entries/inner_category/artificial_end_portal.json
 a678881bef26100ec00971e15f4b66ba12960715 data/patchoulidatagen/patchouli_books/example_book_kt/book.json
