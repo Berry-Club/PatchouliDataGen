@@ -68,12 +68,42 @@ class SpotlightPage private constructor(
 		fun builder() = Builder.builder()
 
 		@JvmStatic
+		fun basicPage(spotlightItemLike: ItemLike, title: String, text: String): SpotlightPage {
+			return basicPage(TripleEither.First(spotlightItemLike), title, text)
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItemStack: ItemStack, title: String, text: String): SpotlightPage {
+			return basicPage(TripleEither.Second(spotlightItemStack), title, text)
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItemTag: TagKey<Item>, title: String, text: String): SpotlightPage {
+			return basicPage(TripleEither.Third(spotlightItemTag), title, text)
+		}
+
+		@JvmStatic
 		fun basicPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
 				.title(title)
 				.text(text)
 				.build()
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItemLike: ItemLike, text: String): SpotlightPage {
+			return basicPage(TripleEither.First(spotlightItemLike), text)
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItemStack: ItemStack, text: String): SpotlightPage {
+			return basicPage(TripleEither.Second(spotlightItemStack), text)
+		}
+
+		@JvmStatic
+		fun basicPage(spotlightItemTag: TagKey<Item>, text: String): SpotlightPage {
+			return basicPage(TripleEither.Third(spotlightItemTag), text)
 		}
 
 		@JvmStatic
@@ -85,6 +115,21 @@ class SpotlightPage private constructor(
 		}
 
 		@JvmStatic
+		fun linkedPage(spotlightItemLike: ItemLike, title: String, text: String): SpotlightPage {
+			return linkedPage(TripleEither.First(spotlightItemLike), title, text)
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItemStack: ItemStack, title: String, text: String): SpotlightPage {
+			return linkedPage(TripleEither.Second(spotlightItemStack), title, text)
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItemTag: TagKey<Item>, title: String, text: String): SpotlightPage {
+			return linkedPage(TripleEither.Third(spotlightItemTag), title, text)
+		}
+
+		@JvmStatic
 		fun linkedPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
@@ -92,6 +137,21 @@ class SpotlightPage private constructor(
 				.text(text)
 				.linkRecipe(true)
 				.build()
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItemLike: ItemLike, text: String): SpotlightPage {
+			return linkedPage(TripleEither.First(spotlightItemLike), text)
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItemStack: ItemStack, text: String): SpotlightPage {
+			return linkedPage(TripleEither.Second(spotlightItemStack), text)
+		}
+
+		@JvmStatic
+		fun linkedPage(spotlightItemTag: TagKey<Item>, text: String): SpotlightPage {
+			return linkedPage(TripleEither.Third(spotlightItemTag), text)
 		}
 
 		@JvmStatic

@@ -8,6 +8,8 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.PatchouliMultiblock
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightItem
+import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
@@ -137,16 +139,9 @@ class ExampleBookProviderKt(
 					.build()
 			)
 			.addPage(
-				TextPage.builder()
-					.title("More lines!!")
-					.text(
-						doubleSpacedLines(
-							"This is a line of text.",
-							"Here's another line of text.",
-							"And yet another line of text.${BR}You can also do it like this!"
-						)
-					)
-					.build()
+				SpotlightPage.linkedPage(
+					SpotlightItem(Items.DIAMOND_SWORD)
+				)
 			)
 			.addPage(
 				TextPage.builder()
