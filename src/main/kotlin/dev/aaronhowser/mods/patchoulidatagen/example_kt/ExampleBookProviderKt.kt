@@ -13,6 +13,7 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
+import net.minecraft.core.component.DataComponents
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
@@ -130,15 +131,14 @@ class ExampleBookProviderKt(
 				SpotlightPage.builder()
 					.addItemTag(ItemTags.DIRT)
 					.addItemLike(Items.DIAMOND_SHOVEL)
-//					.addItemStack(
-//						Items.GOLDEN_HOE
-//							.defaultInstance
-//							.apply {
-//								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
-//								set(DataComponents.MAX_STACK_SIZE, 12321)
-//								count = 4
-//							}
-//					)
+					.addItemStack(Items.APPLE.defaultInstance.copyWithCount(5))
+					.addItemStack(
+						Items.GOLDEN_HOE
+							.defaultInstance
+							.apply {
+								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
+							}
+					)
 					.text("Test")
 					.build()
 			)

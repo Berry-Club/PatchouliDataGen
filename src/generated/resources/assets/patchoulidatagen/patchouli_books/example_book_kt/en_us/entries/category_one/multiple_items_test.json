@@ -1,0 +1,12 @@
+{
+  "category": "patchoulidatagen:category_one",
+  "icon": "minecraft:diamond",
+  "name": "Test",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:minecraft:dirt,minecraft:diamond_shovel,minecraft:apple#5,minecraft:golden_hoe{minecraft:item_name=>literal{Custom Named Golden Hoe}}",
+      "text": "Test"
+    }
+  ]
+}
