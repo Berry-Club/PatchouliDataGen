@@ -8,14 +8,15 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.PatchouliMultiblock
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.MultiblockPage
-import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightItem
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.SpotlightPage
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
+import net.minecraft.core.component.DataComponents
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
+import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
@@ -139,9 +140,19 @@ class ExampleBookProviderKt(
 					.build()
 			)
 			.addPage(
-				SpotlightPage.linkedPage(
-					SpotlightItem(Items.DIAMOND_SWORD)
-				)
+				SpotlightPage.builder()
+					.addItemTag(ItemTags.DIRT)
+					.addItemLike(Items.DIAMOND_SHOVEL)
+					.addItemStack(
+						Items.GOLDEN_HOE
+							.defaultInstance
+							.apply {
+								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
+								set(DataComponents.MAX_STACK_SIZE, 12321)
+								count = 4
+							}
+					)
+					.build()
 			)
 			.addPage(
 				TextPage.builder()

@@ -36,12 +36,17 @@ class SpotlightPage private constructor(
 
 			when (next) {
 				is TripleEither.First -> {
-					// ItemLike
-					sb.append(next.value.asItem().toString())
+					val itemLike = next.value
+					sb.append(itemLike.asItem().toString())
 				}
 
 				is TripleEither.Second -> {
-					// ItemStack
+					val itemStack = next.value
+					sb.append(itemStack.item.toString())
+
+					if (itemStack.count != 1) {
+						sb.append("#").append(itemStack.count)
+					}
 				}
 
 				is TripleEither.Third -> {
@@ -85,7 +90,7 @@ class SpotlightPage private constructor(
 		@JvmStatic
 		fun basicPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
-				.item(spotlightItem)
+				.addSpotlightItem(spotlightItem)
 				.title(title)
 				.text(text)
 				.build()
@@ -109,7 +114,7 @@ class SpotlightPage private constructor(
 		@JvmStatic
 		fun basicPage(spotlightItem: SpotlightItem, text: String): SpotlightPage {
 			return builder()
-				.item(spotlightItem)
+				.addSpotlightItem(spotlightItem)
 				.text(text)
 				.build()
 		}
@@ -132,7 +137,7 @@ class SpotlightPage private constructor(
 		@JvmStatic
 		fun linkedPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
-				.item(spotlightItem)
+				.addSpotlightItem(spotlightItem)
 				.title(title)
 				.text(text)
 				.linkRecipe(true)
@@ -157,7 +162,7 @@ class SpotlightPage private constructor(
 		@JvmStatic
 		fun linkedPage(spotlightItem: SpotlightItem, text: String): SpotlightPage {
 			return builder()
-				.item(spotlightItem)
+				.addSpotlightItem(spotlightItem)
 				.text(text)
 				.linkRecipe(true)
 				.build()
@@ -170,22 +175,22 @@ class SpotlightPage private constructor(
 		private var title: String? = null
 		private var text: String? = null
 
-		fun itemLike(item: ItemLike): Builder {
+		fun addItemLike(item: ItemLike): Builder {
 			spotlightItems.add(TripleEither.First(item))
 			return this
 		}
 
-		fun itemStack(itemStack: ItemStack): Builder {
+		fun addItemStack(itemStack: ItemStack): Builder {
 			spotlightItems.add(TripleEither.Second(itemStack))
 			return this
 		}
 
-		fun itemTag(tag: TagKey<Item>): Builder {
+		fun addItemTag(tag: TagKey<Item>): Builder {
 			spotlightItems.add(TripleEither.Third(tag))
 			return this
 		}
 
-		fun item(spotlightItem: SpotlightItem): Builder {
+		fun addSpotlightItem(spotlightItem: SpotlightItem): Builder {
 			spotlightItems.add(spotlightItem)
 			return this
 		}
