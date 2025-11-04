@@ -3,12 +3,18 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import dev.aaronhowser.mods.patchoulidatagen.util.TripleEither
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 
+typealias SpotlightItem = TripleEither<ItemLike, ItemStack, TagKey<Item>>
+
 class SpotlightPage private constructor(
-	private val spotlightItem: ItemLike,
+	private val spotlightItems: List<SpotlightItem>,
 	private val linkRecipe: Boolean?,
 	private val title: String?,
 	private val text: String?,
@@ -22,8 +28,35 @@ class SpotlightPage private constructor(
 	override fun addToJson(json: JsonObject) {
 		super.addToJson(json)
 
+		val sb = StringBuilder()
+		val iterator = spotlightItems.iterator()
+		while (iterator.hasNext()) {
+			@Suppress("MoveVariableDeclarationIntoWhen")
+			val next = iterator.next()
+
+			when (next) {
+				is TripleEither.First -> {
+					// ItemLike
+					sb.append(next.value.asItem().toString())
+				}
+
+				is TripleEither.Second -> {
+					// ItemStack
+				}
+
+				is TripleEither.Third -> {
+					// TagKey<Item>
+					sb.append("#").append(next.value.location.toString())
+				}
+			}
+
+			if (iterator.hasNext()) {
+				sb.append(",")
+			}
+		}
+
 		json.apply {
-			addProperty("item", spotlightItem.asItem().toString())
+			addProperty("item", sb.toString())
 			addIfNotNull("title", title)
 			addIfNotNull("text", text)
 			addIfNotNull("link_recipe", linkRecipe)
@@ -35,7 +68,7 @@ class SpotlightPage private constructor(
 		fun builder() = Builder.builder()
 
 		@JvmStatic
-		fun basicPage(spotlightItem: ItemLike, title: String, text: String): SpotlightPage {
+		fun basicPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
 				.title(title)
@@ -44,7 +77,7 @@ class SpotlightPage private constructor(
 		}
 
 		@JvmStatic
-		fun basicPage(spotlightItem: ItemLike, text: String): SpotlightPage {
+		fun basicPage(spotlightItem: SpotlightItem, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
 				.text(text)
@@ -52,7 +85,7 @@ class SpotlightPage private constructor(
 		}
 
 		@JvmStatic
-		fun linkedPage(spotlightItem: ItemLike, title: String, text: String): SpotlightPage {
+		fun linkedPage(spotlightItem: SpotlightItem, title: String, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
 				.title(title)
@@ -62,7 +95,7 @@ class SpotlightPage private constructor(
 		}
 
 		@JvmStatic
-		fun linkedPage(spotlightItem: ItemLike, text: String): SpotlightPage {
+		fun linkedPage(spotlightItem: SpotlightItem, text: String): SpotlightPage {
 			return builder()
 				.item(spotlightItem)
 				.text(text)
@@ -72,13 +105,28 @@ class SpotlightPage private constructor(
 	}
 
 	class Builder private constructor() : AbstractPage.Builder<SpotlightPage, Builder>() {
-		private var spotlightItem: ItemLike? = null
+		private var spotlightItems: MutableList<SpotlightItem> = mutableListOf()
 		private var linkRecipe: Boolean? = null
 		private var title: String? = null
 		private var text: String? = null
 
-		fun item(item: ItemLike): Builder {
-			this.spotlightItem = item
+		fun itemLike(item: ItemLike): Builder {
+			spotlightItems.add(TripleEither.First(item))
+			return this
+		}
+
+		fun itemStack(itemStack: ItemStack): Builder {
+			spotlightItems.add(TripleEither.Second(itemStack))
+			return this
+		}
+
+		fun itemTag(tag: TagKey<Item>): Builder {
+			spotlightItems.add(TripleEither.Third(tag))
+			return this
+		}
+
+		fun item(spotlightItem: SpotlightItem): Builder {
+			spotlightItems.add(spotlightItem)
 			return this
 		}
 
@@ -108,10 +156,10 @@ class SpotlightPage private constructor(
 		}
 
 		override fun build(): SpotlightPage {
-			requireNotNull(spotlightItem) { "Spotlight item must be set" }
+			require(spotlightItems.isNotEmpty()) { "At least one spotlight item must be set" }
 
 			return SpotlightPage(
-				spotlightItem = spotlightItem!!,
+				spotlightItems = spotlightItems,
 				linkRecipe = linkRecipe,
 				title = title,
 				text = text,
