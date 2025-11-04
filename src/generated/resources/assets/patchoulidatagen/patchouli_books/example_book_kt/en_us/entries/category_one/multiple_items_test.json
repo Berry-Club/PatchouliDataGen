@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "tag:minecraft:dirt,minecraft:diamond_shovel,minecraft:apple#5,minecraft:golden_hoe{minecraft:item_name=>literal{Custom Named Golden Hoe}}",
+      "item": "tag:minecraft:coal_ores,minecraft:diamond_shovel,minecraft:apple#5",
       "text": "Test"
     }
   ]
