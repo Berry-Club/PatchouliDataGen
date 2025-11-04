@@ -1,7 +1,11 @@
 package dev.aaronhowser.mods.patchoulidatagen.util
 
 import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
+import net.minecraft.core.component.DataComponentPatch
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.nbt.NbtOps
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.ComponentSerialization
 import net.minecraft.resources.ResourceLocation
@@ -60,6 +64,46 @@ object Util {
 		if (value != null) {
 			this.add(key, value)
 		}
+	}
+
+	fun <T> castTo(o: Any?): T {
+		return o as T
+	}
+
+	fun getComponentPatchString(componentPatch: DataComponentPatch): String {
+		val sb = StringBuilder()
+
+		sb.append("[")
+
+		var first = true
+
+		for ((key, value) in componentPatch.entrySet()) {
+			val id = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(key) ?: continue
+			val codec = key.codec() ?: continue
+
+			if (first) {
+				first = false
+			} else {
+				sb.append(",")
+			}
+
+			if (value.isPresent) {
+				sb.append(id).append("=")
+
+				val v = if (codec == Codec.BOOL) {
+					value.get()
+				} else {
+					codec.encodeStart(NbtOps.INSTANCE, castTo(value.get())).getOrThrow()
+				}
+
+				sb.append(v)
+			} else {
+				sb.append("!").append(id)
+			}
+		}
+
+		sb.append("]")
+		return sb.toString()
 	}
 
 }

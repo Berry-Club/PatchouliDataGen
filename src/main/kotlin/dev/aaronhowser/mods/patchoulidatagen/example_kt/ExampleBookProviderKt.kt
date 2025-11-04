@@ -132,13 +132,13 @@ class ExampleBookProviderKt(
 					.addItemTag(ItemTags.COAL_ORES)
 					.addItemLike(Items.DIAMOND_SHOVEL)
 					.addItemStack(Items.APPLE.defaultInstance.copyWithCount(5))
-//					.addItemStack(
-//						Items.GOLDEN_HOE
-//							.defaultInstance
-//							.apply {
-//								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
-//							}
-//					)
+					.addItemStack(
+						Items.GOLDEN_HOE
+							.defaultInstance
+							.apply {
+								set(DataComponents.ITEM_NAME, Component.literal("Custom Named Golden Hoe"))
+							}
+					)
 					.text("Test")
 					.build()
 			)

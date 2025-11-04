@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.util.TripleEither
+import dev.aaronhowser.mods.patchoulidatagen.util.Util
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
@@ -50,7 +51,7 @@ class SpotlightPage private constructor(
 
 					val components = itemStack.componentsPatch
 					if (!components.isEmpty) {
-						sb.append(components.toString())
+						sb.append(Util.getComponentPatchString(components))
 					}
 				}
 
