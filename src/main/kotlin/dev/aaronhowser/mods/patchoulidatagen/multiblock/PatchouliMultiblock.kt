@@ -2,7 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.multiblock
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import dev.aaronhowser.mods.patchoulidatagen.Util.addIfNotNull
+import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block

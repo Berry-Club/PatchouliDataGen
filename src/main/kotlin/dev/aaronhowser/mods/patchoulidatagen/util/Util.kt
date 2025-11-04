@@ -1,4 +1,4 @@
-package dev.aaronhowser.mods.patchoulidatagen
+package dev.aaronhowser.mods.patchoulidatagen.util
 
 import com.google.gson.JsonObject
 import com.mojang.serialization.JsonOps

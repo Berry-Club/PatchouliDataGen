@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "tag:minecraft:coal_ores,minecraft:diamond_shovel,minecraft:apple#5",
+      "item": "tag:minecraft:coal_ores,minecraft:diamond_shovel,minecraft:apple#5,minecraft:wooden_axe[minecraft:damage=1]",
       "text": "Test"
     }
   ]
