@@ -66,10 +66,6 @@ object Util {
 		}
 	}
 
-	fun <T> castTo(o: Any?): T {
-		return o as T
-	}
-
 	fun getComponentPatchString(componentPatch: DataComponentPatch): String {
 		val sb = StringBuilder()
 
@@ -93,7 +89,7 @@ object Util {
 				val v = if (codec == Codec.BOOL) {
 					value.get()
 				} else {
-					codec.encodeStart(NbtOps.INSTANCE, castTo(value.get())).getOrThrow()
+					codec.encodeStart(NbtOps.INSTANCE, value.get().cast()).getOrThrow()
 				}
 
 				sb.append(v)
