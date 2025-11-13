@@ -102,6 +102,14 @@ repositories {
 
     maven { url 'https://maven.blamejared.com' }
 
+    // For Aaron
+    maven {
+        url "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.aaronhowser.mods"
+        }
+    }
+
 }
 
 dependencies {
