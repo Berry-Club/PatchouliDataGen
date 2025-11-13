@@ -1,9 +1,9 @@
 package dev.aaronhowser.mods.patchoulidatagen.book_element
 
 import com.google.gson.JsonObject
+import dev.aaronhowser.mods.aaron.AaronExtensions.isNotTrue
+import dev.aaronhowser.mods.aaron.AaronExtensions.isTrue
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
-import dev.aaronhowser.mods.patchoulidatagen.util.Util.isNotTrue
-import dev.aaronhowser.mods.patchoulidatagen.util.Util.isTrue
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
