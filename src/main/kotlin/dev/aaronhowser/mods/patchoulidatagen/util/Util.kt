@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.util
 import com.google.gson.JsonObject
 import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
+import dev.aaronhowser.mods.aaron.AaronExtensions.cast
 import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.nbt.NbtOps
