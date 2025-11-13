@@ -193,13 +193,16 @@ unifiedPublishing {
         mainPublication jar
 
         relations {
-
             depends {
                 curseforge = modrinth = "kotlin-for-forge"
             }
 
             depends {
                 curseforge = modrinth = "patchouli"
+            }
+
+            depends {
+                curseforge = modrinth = "aaron"
             }
         }
 
