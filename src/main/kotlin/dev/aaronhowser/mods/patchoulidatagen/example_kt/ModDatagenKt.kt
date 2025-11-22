@@ -11,7 +11,10 @@ object ModDatagenKt {
 	@SubscribeEvent
 	fun onGatherData(event: GatherDataEvent) {
 		val generator = event.generator
-		val bookProvider = ExampleBookProviderKt(generator, "example_book_kt", PatchouliDataGen.MOD_ID)
+
+		val registryAccess = event.lookupProvider.get()
+
+		val bookProvider = ExampleBookProviderKt(generator, registryAccess, "example_book_kt", PatchouliDataGen.MOD_ID)
 		generator.addProvider(event.includeClient(), bookProvider)
 	}
 

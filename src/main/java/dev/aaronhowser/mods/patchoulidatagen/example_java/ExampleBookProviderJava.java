@@ -8,6 +8,7 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry;
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.CraftingRecipePage;
 import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage;
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Items;
@@ -20,9 +21,10 @@ public class ExampleBookProviderJava extends PatchouliBookProvider {
 	public ExampleBookProviderJava(
 			@NotNull DataGenerator generator,
 			@NotNull String bookName,
+			@NotNull HolderLookup.Provider holderLookupProvider,
 			@NotNull String modId
 	) {
-		super(generator, bookName, modId);
+		super(generator, holderLookupProvider, bookName, modId);
 	}
 
 	@Override

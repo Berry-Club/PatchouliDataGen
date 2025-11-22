@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -24,8 +25,8 @@ class RelationsPage private constructor(
 
 	override fun getPageType(): String = "relations"
 
-	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
-		super.addToJson(json, registryAccess)
+	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
+		super.addToJson(json, holderLookupProvider)
 
 		json.apply {
 			val entriesArray = JsonArray()

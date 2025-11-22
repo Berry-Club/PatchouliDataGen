@@ -13,6 +13,8 @@ import dev.aaronhowser.mods.patchoulidatagen.page.defaults.TextPage
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
+import net.minecraft.core.HolderLookup
+import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponents
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
@@ -25,9 +27,10 @@ import java.util.function.Consumer
 
 class ExampleBookProviderKt(
 	generator: DataGenerator,
+	holderLookupProvider: HolderLookup.Provider,
 	bookName: String,
 	modId: String
-) : PatchouliBookProvider(generator, bookName, modId) {
+) : PatchouliBookProvider(generator, holderLookupProvider, bookName, modId) {
 
 	override fun buildPages(consumer: Consumer<PatchouliBookElement>) {
 

@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.book_element
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.aaron.AaronExtensions.isNotTrue
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -22,7 +23,7 @@ class PatchouliBookCategory private constructor(
 
 	override fun getSaveName(): String = this.saveName
 
-	override fun toJson(registryAccess: RegistryAccess): JsonObject {
+	override fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject {
 		val json = JsonObject()
 
 		json.apply {

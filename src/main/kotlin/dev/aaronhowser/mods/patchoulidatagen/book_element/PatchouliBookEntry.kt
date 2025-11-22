@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.world.level.ItemLike
@@ -26,7 +27,7 @@ class PatchouliBookEntry private constructor(
 
 	override fun getSaveName(): String = "${category.getSaveName()}/$saveName"
 
-	override fun toJson(registryAccess: RegistryAccess): JsonObject {
+	override fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject {
 		val json = JsonObject()
 
 		json.apply {
@@ -39,7 +40,7 @@ class PatchouliBookEntry private constructor(
 				val pageJson = JsonObject()
 
 				pageJson.addProperty("type", page.getPageTypeId())
-				page.addToJson(pageJson, registryAccess)
+				page.addToJson(pageJson, holderLookupProvider)
 
 				pagesArray.add(pageJson)
 			}
