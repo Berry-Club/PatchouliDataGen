@@ -109,6 +109,24 @@ class PatchouliMultiblock(
 			return this
 		}
 
+		fun <T : Comparable<T>> map(
+			char: Char,
+			block: Block,
+			properties: Map<Property<T>, T>
+		): Builder {
+			require(char !in mappingCharacters) { "Character '$char' is already mapped to a block." }
+
+			mappingCharacters.add(char)
+			val blockId = BuiltInRegistries.BLOCK.getKey(block)
+			val propertiesString = properties.entries.joinToString(",") { (property, value) ->
+				"${property.name}=${property.getName(value)}"
+			}
+			val blockStateString = "${blockId}[$propertiesString]"
+			mappings[char] = blockStateString
+
+			return this
+		}
+
 		fun map(char: Char, blockTag: TagKey<Block>): Builder {
 			require(char !in mappingCharacters) { "Character '$char' is already mapped to a block." }
 
