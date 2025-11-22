@@ -27,7 +27,7 @@ class PatchouliBookEntry private constructor(
 
 	override fun getSaveName(): String = "${category.getSaveName()}/$saveName"
 
-	override fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject {
+	override fun toJson(registries: HolderLookup.Provider): JsonObject {
 		val json = JsonObject()
 
 		json.apply {
@@ -40,7 +40,7 @@ class PatchouliBookEntry private constructor(
 				val pageJson = JsonObject()
 
 				pageJson.addProperty("type", page.getPageTypeId())
-				page.addToJson(pageJson, holderLookupProvider)
+				page.addToJson(pageJson, registries)
 
 				pagesArray.add(pageJson)
 			}

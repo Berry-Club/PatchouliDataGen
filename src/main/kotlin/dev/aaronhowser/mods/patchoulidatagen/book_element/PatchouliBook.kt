@@ -46,7 +46,7 @@ class PatchouliBook private constructor(
 	fun getBookModId(): String = bookModId
 	fun isTranslatable(): Boolean = i18n.isTrue()
 
-	override fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject {
+	override fun toJson(registries: HolderLookup.Provider): JsonObject {
 		val json = JsonObject()
 
 		json.apply {

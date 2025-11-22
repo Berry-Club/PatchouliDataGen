@@ -23,8 +23,8 @@ class SmeltingRecipePage private constructor(
 
 	override fun getPageType(): String = "smelting"
 
-	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
-		super.addToJson(json, holderLookupProvider)
+	override fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
+		super.addToJson(json, registries)
 
 		json.apply {
 			addProperty("recipe", recipeOne)

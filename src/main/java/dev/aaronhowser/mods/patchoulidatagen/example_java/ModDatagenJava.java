@@ -16,11 +16,11 @@ public class ModDatagenJava {
 	public static void onGatherData(GatherDataEvent event) throws ExecutionException, InterruptedException {
 		DataGenerator generator = event.getGenerator();
 
-		HolderLookup.Provider holderLookupProvider = event.getLookupProvider().get();
+		HolderLookup.Provider registries = event.getLookupProvider().get();
 
 		ExampleBookProviderJava bookProvider = new ExampleBookProviderJava(
 				generator,
-				holderLookupProvider,
+				registries,
 				"example_book_java",
 				PatchouliDataGen.MOD_ID
 		);

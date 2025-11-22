@@ -5,7 +5,6 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.JsonOps
 import dev.aaronhowser.mods.aaron.AaronExtensions.cast
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponentPatch
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.nbt.NbtOps
@@ -69,7 +68,7 @@ object Util {
 
 	fun getComponentPatchString(
 		componentPatch: DataComponentPatch,
-		holderLookupProvider: HolderLookup.Provider
+		registries: HolderLookup.Provider
 	): String {
 		val sb = StringBuilder()
 
@@ -93,7 +92,7 @@ object Util {
 				val v = if (codec == Codec.BOOL) {
 					value.get()
 				} else {
-					val context = RegistryOps.create(NbtOps.INSTANCE, holderLookupProvider)
+					val context = RegistryOps.create(NbtOps.INSTANCE, registries)
 					codec.encodeStart(context, value.get().cast()).getOrThrow()
 				}
 

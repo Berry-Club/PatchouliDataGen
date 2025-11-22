@@ -24,8 +24,8 @@ class LinkPage(
 
 	override fun getPageType(): String = "link"
 
-	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
-		super.addToJson(json, holderLookupProvider)
+	override fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
+		super.addToJson(json, registries)
 
 		json.apply {
 			addIfNotNull("text", text)

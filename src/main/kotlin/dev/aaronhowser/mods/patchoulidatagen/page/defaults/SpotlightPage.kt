@@ -28,8 +28,8 @@ class SpotlightPage private constructor(
 
 	override fun getPageType(): String = "spotlight"
 
-	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
-		super.addToJson(json, holderLookupProvider)
+	override fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
+		super.addToJson(json, registries)
 
 		val sb = StringBuilder()
 		val iterator = spotlightItems.iterator()
@@ -53,7 +53,7 @@ class SpotlightPage private constructor(
 
 					val components = itemStack.componentsPatch
 					if (!components.isEmpty) {
-						sb.append(Util.getComponentPatchString(components, holderLookupProvider))
+						sb.append(Util.getComponentPatchString(components, registries))
 					}
 				}
 

@@ -25,8 +25,8 @@ class RelationsPage private constructor(
 
 	override fun getPageType(): String = "relations"
 
-	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
-		super.addToJson(json, holderLookupProvider)
+	override fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
+		super.addToJson(json, registries)
 
 		json.apply {
 			val entriesArray = JsonArray()

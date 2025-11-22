@@ -6,6 +6,6 @@ import net.minecraft.core.HolderLookup
 interface PatchouliBookElement {
 
 	fun getSaveName(): String
-	fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject
+	fun toJson(registries: HolderLookup.Provider): JsonObject
 
 }

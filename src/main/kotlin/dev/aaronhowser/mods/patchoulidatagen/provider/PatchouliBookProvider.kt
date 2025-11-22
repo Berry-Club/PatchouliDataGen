@@ -18,7 +18,7 @@ import java.util.function.Consumer
 
 abstract class PatchouliBookProvider(
 	protected val generator: DataGenerator,
-	protected val holderLookupProvider: HolderLookup.Provider,
+	protected val registries: HolderLookup.Provider,
 	protected val bookName: String,
 	protected val modId: String
 ) : DataProvider {
@@ -88,7 +88,7 @@ abstract class PatchouliBookProvider(
 		bookElement: T,
 		bookElementPath: Path
 	) {
-		val future = DataProvider.saveStable(cache, bookElement.toJson(holderLookupProvider), bookElementPath)
+		val future = DataProvider.saveStable(cache, bookElement.toJson(registries), bookElementPath)
 		futures.add(future)
 	}
 

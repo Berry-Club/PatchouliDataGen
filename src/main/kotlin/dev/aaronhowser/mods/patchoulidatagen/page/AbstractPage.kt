@@ -14,7 +14,7 @@ abstract class AbstractPage(
 
 	abstract fun getPageType(): String
 
-	open fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
+	open fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
 		json.apply {
 			addIfNotNull("advancement", advancement)
 			addIfNotNull("flag", flag)

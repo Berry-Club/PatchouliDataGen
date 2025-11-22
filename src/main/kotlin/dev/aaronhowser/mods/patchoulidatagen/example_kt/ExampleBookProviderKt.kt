@@ -27,10 +27,10 @@ import java.util.function.Consumer
 
 class ExampleBookProviderKt(
 	generator: DataGenerator,
-	holderLookupProvider: HolderLookup.Provider,
+	registries: HolderLookup.Provider,
 	bookName: String,
 	modId: String
-) : PatchouliBookProvider(generator, holderLookupProvider, bookName, modId) {
+) : PatchouliBookProvider(generator, registries, bookName, modId) {
 
 	override fun buildPages(consumer: Consumer<PatchouliBookElement>) {
 

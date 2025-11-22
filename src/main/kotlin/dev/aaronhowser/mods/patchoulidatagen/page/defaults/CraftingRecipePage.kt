@@ -27,8 +27,8 @@ class CraftingRecipePage private constructor(
 
 	override fun getPageType(): String = "crafting"
 
-	override fun addToJson(json: JsonObject, holderLookupProvider: HolderLookup.Provider) {
-		super.addToJson(json, holderLookupProvider)
+	override fun addToJson(json: JsonObject, registries: HolderLookup.Provider) {
+		super.addToJson(json, registries)
 
 		json.apply {
 			addProperty("recipe", recipeOne)

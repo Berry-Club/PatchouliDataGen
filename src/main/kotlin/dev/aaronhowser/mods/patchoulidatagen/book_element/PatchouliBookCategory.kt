@@ -23,7 +23,7 @@ class PatchouliBookCategory private constructor(
 
 	override fun getSaveName(): String = this.saveName
 
-	override fun toJson(holderLookupProvider: HolderLookup.Provider): JsonObject {
+	override fun toJson(registries: HolderLookup.Provider): JsonObject {
 		val json = JsonObject()
 
 		json.apply {
