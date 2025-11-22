@@ -7,6 +7,11 @@
       "type": "patchouli:spotlight",
       "item": "tag:minecraft:coal_ores,minecraft:diamond_shovel,minecraft:apple#5,minecraft:golden_hoe[minecraft:item_name='\"Custom Named Golden Hoe\"']",
       "text": "Test"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:goat_horn[minecraft:enchantment_glint_override=true]",
+      "text": "Instrument"
     }
   ]
 }

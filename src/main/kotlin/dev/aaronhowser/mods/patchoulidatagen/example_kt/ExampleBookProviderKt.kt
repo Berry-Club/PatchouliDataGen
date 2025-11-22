@@ -1,5 +1,6 @@
 package dev.aaronhowser.mods.patchoulidatagen.example_kt
 
+import dev.aaronhowser.mods.aaron.AaronExtensions.withComponent
 import dev.aaronhowser.mods.patchoulidatagen.PatchouliDataGen
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
@@ -15,9 +16,11 @@ import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Comp
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.component.DataComponents
+import net.minecraft.core.registries.Registries
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component
 import net.minecraft.tags.ItemTags
+import net.minecraft.world.item.Instruments
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.EndRodBlock
@@ -142,6 +145,19 @@ class ExampleBookProviderKt(
 							}
 					)
 					.text("Test")
+					.build()
+			)
+			.addPage(
+				SpotlightPage.builder()
+					.addItemStack(
+						Items.GOAT_HORN.withComponent(
+							DataComponents.INSTRUMENT,
+							registries
+								.lookupOrThrow(Registries.INSTRUMENT)
+								.getOrThrow(Instruments.CALL_GOAT_HORN)
+						)
+					)
+					.text("Instrument")
 					.build()
 			)
 			.display("Test", Items.DIAMOND)

@@ -76,9 +76,9 @@ object Util {
 
 		var first = true
 
-		for ((key, value) in componentPatch.entrySet()) {
-			val id = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(key) ?: continue
-			val codec = key.codec() ?: continue
+		for ((componentType, componentValue) in componentPatch.entrySet()) {
+			val componentTypeId = BuiltInRegistries.DATA_COMPONENT_TYPE.getKey(componentType) ?: continue
+			val componentCodec = componentType.codec() ?: continue
 
 			if (first) {
 				first = false
@@ -86,19 +86,19 @@ object Util {
 				sb.append(",")
 			}
 
-			if (value.isPresent) {
-				sb.append(id).append("=")
+			if (componentValue.isPresent) {
+				sb.append(componentTypeId).append("=")
 
-				val v = if (codec == Codec.BOOL) {
-					value.get()
+				val v = if (componentCodec == Codec.BOOL) {
+					componentValue.get()
 				} else {
 					val context = RegistryOps.create(NbtOps.INSTANCE, registries)
-					codec.encodeStart(context, value.get().cast()).getOrThrow()
+					componentCodec.encodeStart(context, componentValue.get().cast()).getOrThrow()
 				}
 
 				sb.append(v)
 			} else {
-				sb.append("!").append(id)
+				sb.append("!").append(componentTypeId)
 			}
 		}
 
