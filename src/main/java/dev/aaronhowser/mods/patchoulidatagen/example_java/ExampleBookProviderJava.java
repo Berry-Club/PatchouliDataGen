@@ -20,8 +20,8 @@ public class ExampleBookProviderJava extends PatchouliBookProvider {
 
 	public ExampleBookProviderJava(
 			@NotNull DataGenerator generator,
-			@NotNull String bookName,
 			@NotNull HolderLookup.Provider holderLookupProvider,
+			@NotNull String bookName,
 			@NotNull String modId
 	) {
 		super(generator, holderLookupProvider, bookName, modId);
