@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.multiblock.Multiblock
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 
@@ -25,8 +26,8 @@ class MultiblockPage private constructor(
 
 	override fun getPageType(): String = "multiblock"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		json.apply {
 			addProperty("name", multiblockName)

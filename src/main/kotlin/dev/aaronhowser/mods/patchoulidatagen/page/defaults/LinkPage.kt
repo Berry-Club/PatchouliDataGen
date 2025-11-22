@@ -3,6 +3,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.RegistryAccess
 import net.minecraft.resources.ResourceLocation
 
 /**
@@ -22,8 +23,8 @@ class LinkPage(
 
 	override fun getPageType(): String = "link"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		json.apply {
 			addIfNotNull("text", text)

@@ -5,6 +5,7 @@ import dev.aaronhowser.mods.aaron.TripleEither
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.util.Util
+import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey
@@ -26,8 +27,8 @@ class SpotlightPage private constructor(
 
 	override fun getPageType(): String = "spotlight"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		val sb = StringBuilder()
 		val iterator = spotlightItems.iterator()
@@ -51,7 +52,7 @@ class SpotlightPage private constructor(
 
 					val components = itemStack.componentsPatch
 					if (!components.isEmpty) {
-						sb.append(Util.getComponentPatchString(components))
+						sb.append(Util.getComponentPatchString(components, registryAccess))
 					}
 				}
 

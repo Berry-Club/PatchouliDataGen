@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.RegistryAccess
 import net.minecraft.resources.ResourceLocation
 
 /**
@@ -18,8 +19,8 @@ class EmptyPage private constructor(
 
 	override fun getPageType(): String = "empty"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		if (drawFiller) {
 			json.addProperty("draw_filler", true)

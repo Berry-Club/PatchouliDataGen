@@ -2,6 +2,7 @@ package dev.aaronhowser.mods.patchoulidatagen.page
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
+import net.minecraft.core.RegistryAccess
 import net.minecraft.resources.ResourceLocation
 
 abstract class AbstractPage(
@@ -12,7 +13,7 @@ abstract class AbstractPage(
 
 	abstract fun getPageType(): String
 
-	open fun addToJson(json: JsonObject) {
+	open fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
 		json.apply {
 			addIfNotNull("advancement", advancement)
 			addIfNotNull("flag", flag)

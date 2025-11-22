@@ -6,6 +6,7 @@ import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBook
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookCategory
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookElement
 import dev.aaronhowser.mods.patchoulidatagen.book_element.PatchouliBookEntry
+import net.minecraft.core.RegistryAccess
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
@@ -17,6 +18,7 @@ import java.util.function.Consumer
 
 abstract class PatchouliBookProvider(
 	protected val generator: DataGenerator,
+	protected val registryAccess: RegistryAccess,
 	protected val bookName: String,
 	protected val modId: String
 ) : DataProvider {
@@ -86,7 +88,7 @@ abstract class PatchouliBookProvider(
 		bookElement: T,
 		bookElementPath: Path
 	) {
-		val future = DataProvider.saveStable(cache, bookElement.toJson(), bookElementPath)
+		val future = DataProvider.saveStable(cache, bookElement.toJson(registryAccess), bookElementPath)
 		futures.add(future)
 	}
 

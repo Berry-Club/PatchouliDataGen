@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 
@@ -24,8 +25,8 @@ class ImagePage private constructor(
 
 	override fun getPageType(): String = "image"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		json.apply {
 

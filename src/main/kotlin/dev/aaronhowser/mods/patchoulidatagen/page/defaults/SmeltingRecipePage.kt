@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addProperty
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import net.minecraft.core.RegistryAccess
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -21,8 +22,8 @@ class SmeltingRecipePage private constructor(
 
 	override fun getPageType(): String = "smelting"
 
-	override fun addToJson(json: JsonObject) {
-		super.addToJson(json)
+	override fun addToJson(json: JsonObject, registryAccess: RegistryAccess) {
+		super.addToJson(json, registryAccess)
 
 		json.apply {
 			addProperty("recipe", recipeOne)
