@@ -1,6 +1,7 @@
 package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
+import com.mojang.datafixers.util.Either
 import dev.aaronhowser.mods.aaron.TripleEither
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.util.Util
@@ -14,9 +15,10 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
 
 typealias SpotlightItem = TripleEither<ItemLike, ItemStack, TagKey<Item>>
+typealias SpotlightItemsOrString = Either<List<SpotlightItem>, String>
 
 class SpotlightPage private constructor(
-	private val spotlightItems: List<SpotlightItem>,
+	private val spotlightItems: SpotlightItemsOrString,
 	private val linkRecipe: Boolean?,
 	private val title: String?,
 	private val text: String?,
@@ -31,41 +33,49 @@ class SpotlightPage private constructor(
 		super.addToJson(json, registries)
 
 		val sb = StringBuilder()
-		val iterator = spotlightItems.iterator()
-		while (iterator.hasNext()) {
-			@Suppress("MoveVariableDeclarationIntoWhen")
-			val next = iterator.next()
 
-			when (next) {
-				is TripleEither.First -> {
-					val itemLike = next.value
-					sb.append(itemLike.asItem().toString())
-				}
+		spotlightItems
+			.ifLeft { list ->
+				val iterator = list.iterator()
+				while (iterator.hasNext()) {
 
-				is TripleEither.Second -> {
-					val itemStack = next.value
-					sb.append(itemStack.item.toString())
+					@Suppress("MoveVariableDeclarationIntoWhen", "RedundantSuppression")
+					val next = iterator.next()
 
-					if (itemStack.count != 1) {
-						sb.append("#").append(itemStack.count)
+					when (next) {
+						is TripleEither.First -> {
+							val itemLike = next.value
+							sb.append(itemLike.asItem().toString())
+						}
+
+						is TripleEither.Second -> {
+							val itemStack = next.value
+							sb.append(itemStack.item.toString())
+
+							if (itemStack.count != 1) {
+								sb.append("#").append(itemStack.count)
+							}
+
+							val components = itemStack.componentsPatch
+							if (!components.isEmpty) {
+								sb.append(Util.getComponentPatchString(components, registries))
+							}
+						}
+
+						is TripleEither.Third -> {
+							// TagKey<Item>
+							sb.append("tag:").append(next.value.location.toString())
+						}
 					}
 
-					val components = itemStack.componentsPatch
-					if (!components.isEmpty) {
-						sb.append(Util.getComponentPatchString(components, registries))
+					if (iterator.hasNext()) {
+						sb.append(",")
 					}
 				}
-
-				is TripleEither.Third -> {
-					// TagKey<Item>
-					sb.append("tag:").append(next.value.location.toString())
-				}
 			}
-
-			if (iterator.hasNext()) {
-				sb.append(",")
+			.ifRight {
+				sb.append(it)
 			}
-		}
 
 		json.apply {
 			addProperty("item", sb.toString())
@@ -178,27 +188,44 @@ class SpotlightPage private constructor(
 
 	class Builder private constructor() : AbstractPage.Builder<SpotlightPage, Builder>() {
 		private var spotlightItems: MutableList<SpotlightItem> = mutableListOf()
+		private var itemsString: String? = null
 		private var linkRecipe: Boolean? = null
 		private var title: String? = null
 		private var text: String? = null
 
 		fun addItemLike(item: ItemLike): Builder {
+			require(itemsString == null) { "Cannot combine items string with actual items" }
+
 			spotlightItems.add(TripleEither.First(item))
 			return this
 		}
 
 		fun addItemStack(itemStack: ItemStack): Builder {
+			require(itemsString == null) { "Cannot combine items string with actual items" }
+
 			spotlightItems.add(TripleEither.Second(itemStack))
 			return this
 		}
 
 		fun addItemTag(tag: TagKey<Item>): Builder {
+			require(itemsString == null) { "Cannot combine items string with actual items" }
+
 			spotlightItems.add(TripleEither.Third(tag))
 			return this
 		}
 
 		fun addSpotlightItem(spotlightItem: SpotlightItem): Builder {
+			require(itemsString == null) { "Cannot combine items string with actual items" }
+
 			spotlightItems.add(spotlightItem)
+			return this
+		}
+
+		/** Because sometimes you can't use the actual itemstack, like if it has a data component that's a Holder for some reason */
+		fun setItemsString(itemsString: String): Builder {
+			require(spotlightItems.isEmpty()) { "Cannot combine items string with actual items" }
+
+			this.itemsString = itemsString
 			return this
 		}
 
@@ -228,10 +255,16 @@ class SpotlightPage private constructor(
 		}
 
 		override fun build(): SpotlightPage {
-			require(spotlightItems.isNotEmpty()) { "At least one spotlight item must be set" }
+			require(spotlightItems.isNotEmpty() || !itemsString.isNullOrBlank()) { "At least one spotlight item must be set" }
+
+			val either: SpotlightItemsOrString = if (!itemsString.isNullOrBlank()) {
+				Either.right(itemsString!!)
+			} else {
+				Either.left(spotlightItems)
+			}
 
 			return SpotlightPage(
-				spotlightItems = spotlightItems,
+				spotlightItems = either,
 				linkRecipe = linkRecipe,
 				title = title,
 				text = text,

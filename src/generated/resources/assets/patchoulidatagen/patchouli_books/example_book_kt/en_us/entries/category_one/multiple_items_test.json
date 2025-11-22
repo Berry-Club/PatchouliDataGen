@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "minecraft:goat_horn[minecraft:enchantment_glint_override=true]",
+      "item": "minecraft:goat_horn[minecraft:instrument=\"minecraft:call_goat_horn\"]",
       "text": "Instrument"
     }
   ]

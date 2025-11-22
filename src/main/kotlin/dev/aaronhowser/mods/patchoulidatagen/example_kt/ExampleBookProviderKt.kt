@@ -149,14 +149,7 @@ class ExampleBookProviderKt(
 			)
 			.addPage(
 				SpotlightPage.builder()
-					.addItemStack(
-						Items.GOAT_HORN.withComponent(
-							DataComponents.INSTRUMENT,
-							registries
-								.lookupOrThrow(Registries.INSTRUMENT)
-								.getOrThrow(Instruments.CALL_GOAT_HORN)
-						)
-					)
+					.setItemsString("minecraft:goat_horn[minecraft:instrument=\"minecraft:call_goat_horn\"]")
 					.text("Instrument")
 					.build()
 			)
