@@ -14,7 +14,6 @@ import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider
 import dev.aaronhowser.mods.patchoulidatagen.provider.PatchouliBookProvider.Companion.TextColor
 import net.minecraft.core.Direction
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.core.component.DataComponents
 import net.minecraft.data.DataGenerator
 import net.minecraft.network.chat.Component

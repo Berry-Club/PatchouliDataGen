@@ -1,10 +1,9 @@
 package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
-import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
+import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 
@@ -39,7 +38,7 @@ class QuestPage private constructor(
 		fun builder(): Builder = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<QuestPage, Builder>(){
+	class Builder private constructor() : AbstractPage.Builder<QuestPage, Builder>() {
 		private var trigger: String? = null
 		private var title: String? = null
 		private var text: String? = null

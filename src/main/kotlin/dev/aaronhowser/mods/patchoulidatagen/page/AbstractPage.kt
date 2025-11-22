@@ -3,7 +3,6 @@ package dev.aaronhowser.mods.patchoulidatagen.page
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.resources.ResourceLocation
 
 abstract class AbstractPage(

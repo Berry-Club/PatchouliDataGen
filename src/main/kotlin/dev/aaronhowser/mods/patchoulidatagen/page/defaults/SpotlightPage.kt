@@ -2,11 +2,10 @@ package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
 import dev.aaronhowser.mods.aaron.TripleEither
-import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.util.Util
+import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.TagKey

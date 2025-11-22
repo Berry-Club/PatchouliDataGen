@@ -1,11 +1,10 @@
 package dev.aaronhowser.mods.patchoulidatagen.page.defaults
 
 import com.google.gson.JsonObject
+import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addIfNotNull
 import dev.aaronhowser.mods.patchoulidatagen.util.Util.addProperty
-import dev.aaronhowser.mods.patchoulidatagen.page.AbstractPage
 import net.minecraft.core.HolderLookup
-import net.minecraft.core.RegistryAccess
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -39,7 +38,7 @@ class SmeltingRecipePage private constructor(
 		fun builder() = Builder.setup()
 	}
 
-	class Builder private constructor() : AbstractPage.Builder<SmeltingRecipePage, Builder>(){
+	class Builder private constructor() : AbstractPage.Builder<SmeltingRecipePage, Builder>() {
 		private var recipeOne: ResourceLocation? = null
 		private var recipeTwo: ResourceLocation? = null
 		private var title: String? = null
